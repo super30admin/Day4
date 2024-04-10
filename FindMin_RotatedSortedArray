@@ -1,0 +1,43 @@
+# Time Complexity : O(log N) Because we are searching in the half array to find min element
+# Space Complexity : O(log N) 
+# Did this code successfully run on Leetcode: Yes
+# Any problem you faced while coding this: No
+
+# Given is rotated sorted array. Logic applies binary search on array. Hint is that the minimum always lies in unsorted part of array from mid.
+
+
+class Solution(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        l=0
+        h=len(nums)-1
+
+        while l<=h:
+            mid = l + (h-l)//2
+
+            if nums[l]<=nums[h]: #If entire array is sorted, return left most element
+                return nums[l]
+            elif nums[l]<=nums[mid] and nums[l]>nums[h]: #left sorted array
+                l=mid+1
+            else: #Right sorted array
+                h=mid
+
+            # Logic taught in class
+            # if((mid==0 or nums[mid]<nums[mid-1]) and (mid==h or nums[mid]<nums[mid+1])):
+            #     return nums[mid]
+            # elif nums[l] <= nums[mid]:
+            #     l=mid+1
+            # else:
+            #     h=mid-1
+
+        return 5555
+
+        
+obj = Solution()
+data = [4,5,6,7,8,1,2,3]
+
+min = obj.findMin(data)
+print("Minimum: ", min)
