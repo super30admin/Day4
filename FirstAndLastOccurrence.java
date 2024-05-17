@@ -60,7 +60,7 @@ class FirstAndLastOccurrence {
             int midVal = a[mid];
 
             if(midVal == target) {
-
+                //mid == low, ensures that mid does not go lower the left side of the search space
                 if(mid == low || a[mid-1] != target) {
                     return mid;
                 }
@@ -86,6 +86,7 @@ class FirstAndLastOccurrence {
 
             if(midVal == target) {
 
+                //mid == high, ensures that mid does not go beyond the right side search space
                 if(mid == high || a[mid+1] != target) {
                     return mid;
                 }
