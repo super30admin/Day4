@@ -2,7 +2,7 @@
     LC - 153. Find Minimum in Rotated Sorted Array
     TC - O(log n)
     SC - O(1)
-    Approach - Using Binary search to find the first and last position separately. Observation is in most of the case, if one half of array is sorted then always, target lies in the unsorted.
+    Approach - Using Binary search to find the minimum in rotated sorted array. Observation is in most of the case, if one half of array is sorted then always, target lies in the unsorted.
 */
 
 class Solution {
