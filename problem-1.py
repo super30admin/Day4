@@ -6,8 +6,8 @@
 # Approach :
 
 # we apply binary search on both parts of the middle element
-# if we see that arr[mid-1] is not equal to the arr[mid] th element, we reutrn that arr[mid]th index
-# similary if we see that arr[mid+1] th is not equal to arr[mid]th index, we return arr[mid] th index
+# to find the first occurence index of the target element,if we see that arr[mid-1] is not equal to the arr[mid] th element, we reutrn that arr[mid]th index
+# similary, to find the last occurence index of the target element, if we see that arr[mid+1] th is not equal to arr[mid]th index, we return arr[mid] th index
 
 
 class Solution:
