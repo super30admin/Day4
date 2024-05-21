@@ -1,6 +1,6 @@
 class Solution {
     // Time complexity: O(logn)
-    // Space Complexity :O(1)
+    // Space Complexity :O(1)  
     public int[] searchRange(int[] nums, int target) {
         int first = binarySearchFirst(nums, target);
         if(first == -1){
