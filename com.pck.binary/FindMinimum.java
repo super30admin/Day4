@@ -1,4 +1,6 @@
 class Solution {
+    // Time complexity: O(logn)
+    // Space Complexity :O(1)
     public int findMin(int[] nums) {
         int low = 0;
         int high = nums.length - 1;
