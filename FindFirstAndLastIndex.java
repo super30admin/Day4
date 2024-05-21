@@ -1,3 +1,13 @@
+/**
+ *
+ * Algo:
+ * Find First Element
+ *  - first the element and move until the left side element has different value
+ *  - again find the element and move until the right side using binary search until the right side has different value
+ * Time Complexity : O(log(n))
+ *
+ * Space Complexity : O(1)
+ */
 class FindFirstAndLastIndex {
     public int[] searchRange(int[] nums, int target) {
         int first = getFirstIndex(nums,target);
