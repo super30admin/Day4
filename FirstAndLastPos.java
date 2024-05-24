@@ -1,3 +1,7 @@
+/***
+ * TC - O(log n)
+ * SC - O(1)
+ */
 class FirstAndLastPos {
     public int[] searchRange(int[] nums, int target) {
         if(nums == null || nums.length == 0)

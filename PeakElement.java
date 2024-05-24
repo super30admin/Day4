@@ -1,3 +1,7 @@
+/***
+ * TC - O(log n)
+ * SC - O(1)
+ */
 class PeakElement {
     public int findPeakElement(int[] nums) {
 

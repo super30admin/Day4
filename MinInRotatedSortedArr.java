@@ -1,3 +1,7 @@
+/***
+ * TC - O(log n)
+ * SC - O(1)
+ */
 class MinInRotatedSortedArr {
     public int findMin(int[] nums) {
         if(nums ==null || nums.length == 0) {
