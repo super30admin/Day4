@@ -1,12 +1,8 @@
 '''
 ## Problem 2: (https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
-
 Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
-
 (i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]).
-
 Find the minimum element.
-
 You may assume no duplicate exists in the array.
 
 Example 1:
@@ -16,15 +12,17 @@ Output: 1
 Example 2:
 Input: [4,5,6,7,0,1,2]
 Output: 0
-
 '''
 
 '''
 Approach:
-In this problem we use a modified binary search
-We use a special property of a rotated sorted array. The property is that when a rotated sorted array is split in 2 halves, atleast one half is sorted.
-We fist see the middle element, if the middle element is smaller than both its adjacent neighbours, it means it's the mininum value in the array.
-If not, we look for the sorted subarray on both the sides (by simply comparing the fisrt and last value) and return the leftmost value in the sorted subarray.
+- In this problem we use a modified binary search.
+- We use a special property of a rotated sorted array. 
+  The property is that when a rotated sorted array is split in 2 halves, atleast one half is sorted.
+- We fist see the middle element, if the middle element is smaller than both its adjacent neighbours,
+  it means it's the mininum value in the array.
+- If not, we look for the sorted subarray on both the sides (by simply comparing the fisrt and last value) 
+  and return the leftmost value in the sorted subarray.
 
 Time Complexity: O(logn)
 Space Complexity: O(1)
