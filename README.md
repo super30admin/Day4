@@ -10,6 +10,54 @@ Your algorithm's runtime complexity must be in the order of O(log n).
 
 If the target is not found in the array, return [-1, -1].
 
+
+#Time Complexity: O(logn)
+#Space Complexity:O(1)
+# Did this code successfully run on Leetcode : Yes
+# Any problem you faced while coding this : No
+
+#Implemented two binary search functions to find the first and last occurrences of target by comparing target with low and high.
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        def FirstOccurence(nums, target):
+            low, high = 0, len(nums) - 1
+            while low <= high:
+                mid = low + (high - low) // 2
+                if nums[mid] >= target:
+                    high = mid-1
+                else:
+                    low = mid + 1
+            return low
+
+        def LastOccurence(nums, target):
+            low, high = 0, len(nums) - 1
+            while low <= high:
+                mid = low + (high - low) // 2
+                if nums[mid] <= target:
+                    low = mid+1
+                else:
+                    high = mid-1
+            return high
+        
+        start = FirstOccurence(nums, target)
+        end = LastOccurence(nums, target)
+        
+        if start <= end and nums[start] == target and nums[end] == target:
+            return [start, end]
+        else:
+            return [-1, -1]
+        
+solution = Solution()
+nums = [5,7,7,8,8,10]
+target=7
+Occurences = solution.searchRange(nums,target)
+print("The occurences of target in array :", Occurences)
+
 Example 1:
 
 Input: nums = [5,7,7,8,8,10], target = 8
@@ -29,6 +77,32 @@ Find the minimum element.
 
 You may assume no duplicate exists in the array.
 
+#Time Complexity: O(logn)
+#Space Complexity:O(1)
+# Did this code successfully run on Leetcode : Yes
+# Any problem you faced while coding this : No
+
+# Rotated array - atleast one part of array will be sorted, so that i have compared with middle element and right element to find minimum element among the array.
+class Solution(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        left,right = 0,len(nums)-1
+        while left<right:
+            mid = left+(right-left)//2
+            if nums[mid]>nums[right]:
+                left = mid+1
+            else:
+                right = mid
+        return nums[left]
+
+solution= Solution()
+nums = [3,4,1,5,2]
+Min_element = solution.findMin(nums)
+print("The Minimum element present in the rotated sorted array is :", Min_element)
+
 Example 1:
 Input: [3,4,5,1,2]
 Output: 1
@@ -45,6 +119,33 @@ Given an input array nums, where nums[i] ≠ nums[i+1], find a peak element and 
 The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
 
 You may imagine that nums[-1] = nums[n] = -∞.
+
+#Time Complexity: O(logn)
+#Space Complexity:O(1)
+# Did this code successfully run on Leetcode : Yes
+# Any problem you faced while coding this : No
+
+#finding the peek element by comparing mid element with its neighbors by using binary search.
+
+class Solution(object):
+    def findPeakElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        low,high = 0,len(nums)-1
+        while low<high:
+            mid = low+(high-low)//2
+            if nums[mid] > nums[mid+1]:
+                high = mid
+            else:
+                low = mid+1
+        return high
+
+solution = Solution()   
+nums = [1,6,5,1]
+peek_index = solution.findPeakElement(nums)
+print("The Peek element corresponding to peek index:",peek_index)
 
 Example 1:
 
