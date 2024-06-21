@@ -1,0 +1,91 @@
+##############34. Find First and Last Position of Element in Sorted Array####################
+
+// Time Complexity : logN
+// Space Complexity : N
+// Did this code successfully run on Leetcode : following case failed and other may fail
+[2,2]
+// Any problem you faced while coding this : used binary search and my code worked assuming all element are in increasing order and only 2 elements are present which are duplicate
+
+
+// Your code here along with comments explaining your approach in three sentences only
+
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        l1,r1=0,len(nums)-1
+        if len(nums)==1:
+            if target==nums[0]:
+                return [0,0]
+            else:
+                return [-1,-1]
+        while l1<=r1:
+            mid=(l1+r1)//2
+            if nums[mid]==target:
+                if nums[mid-1]==target: #this part is additional to check if element next or before it is same 
+                    return [mid-1,mid]
+                else:
+                    return [mid,mid+1]
+            elif nums[mid]>target:
+                r1=mid-1
+            else:
+                l1=mid+1
+        return [-1,-1]
+        
+
+##############153. Find Minimum in Rotated Sorted Array####################
+
+
+// Time Complexity : logN
+// Space Complexity : N
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : no problem but 1 of scenario was giving problem where the minimum element was 1 step ahead of mid and to handle it I applied clause mentioned below as #point check
+
+
+// Your code here along with comments explaining your approach in three sentences only
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        l1,r1=0,len(nums)-1
+        
+        if nums[l1]<=nums[r1]:
+            return nums[l1]
+        while l1<=r1: # usualy binary search
+            mid=(l1+r1)//2
+            if nums[mid]<nums[mid-1]: #check if mid element is the minimum element
+                return nums[mid]
+            elif nums[mid]>nums[mid+1]: # point check - check if the element after MID is minimum as in certain cases without this condition it failed
+                return nums[mid+1]
+            elif nums[mid]<nums[l1]:
+                r1=mid-1
+            else:
+                l1=mid+1
+                '''if nums[l1]<nums[l1-1]:
+                    return nums[l1]'''
+        return -1
+        
+
+##############162. Find Peak Element#########################
+
+
+
+// Time Complexity : N (couldn't find BS way so applied brute force)
+// Space Complexity : N
+// Did this code successfully run on Leetcode : yes but brute force way
+// Any problem you faced while coding this : no
+
+
+// Your code here along with comments explaining your approach in three sentences only
+
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        if len(nums)==1:
+            return 0
+        for i in range(len(nums)):
+            if i==0 and nums[i]>nums[i+1]:
+                return i
+            elif i==len(nums)-1 and nums[i]>nums[i-1]:
+                return i
+            elif nums[i]>nums[i-1] and nums[i]>nums[i+1]:
+                return i
+        return -1
+        
