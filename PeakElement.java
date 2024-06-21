@@ -21,7 +21,8 @@ class PealElement {
         if(nums[n-1] > nums[n-2])
             return n-1;
 
-        int low = 0;
+        // Search in remaining array
+        int low = 1;
         int high = n-2;
 
         while(low <= high) {
