@@ -1,27 +1,18 @@
-//Time Complexity: O(logn)
-//Space Complexity: O(1)
+# time: O(log n)
+# space: O(1)
 
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        l,r = 0, len(nums)-1
 
- if len(nums)==1:
-    return nums[0]
+        while l<r:
+            m = (l+r)//2
+
+            if nums[l]<nums[r]:
+                return nums[l]
+            elif nums[m]>nums[r]:
+                l=m+1
+            else:
+                r=m
+        return nums[l]
         
-  low=0
-  high=len(nums)-1
-
-  if nums[high]>nums[0]:
-      return nums[0]
-
-  while(low<=high):
-
-      mid=low+(high-low)//2
-
-      if (nums[mid]>nums[mid+1]): 
-          return nums[mid+1]
-
-      if nums[mid-1]>nums[mid]:  
-          return nums[mid]
-
-      if nums[mid]>nums[0]:  
-          low=mid+1
-      else:
-          high=mid-1 

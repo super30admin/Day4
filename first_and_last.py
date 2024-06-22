@@ -1,41 +1,34 @@
-// Time Complexity :O(logn)
-// Space Complexity :O(1)
+# time: o(log n)
+# space: O(log n)
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        lower = self.binSearch(nums, 0, len(nums)-1, target, True)
+        if lower == -1:
+            return [-1,-1]
+        upper = self.binSearch(nums, 0, len(nums)-1, target, False)
+        return [lower, upper]
+
+    def binSearch(self, nums, l,r, target, isFirst):
+        while l<=r:
+            m = (l+r)//2
+            if target == nums[m]:
+                if isFirst:
+                    if m==l or nums[m]>nums[m-1]:
+                        return m
+                    else:
+                        r=r-1
+                else:
+                    if m==r or nums[m]<nums[m+1]:
+                        return m
+                    else:
+                        l=l+1
+            elif target > nums[m] :
+                l = m+1
+            else:
+                r = m-1
+
+        return -1
+                 
 
 
-// Your code here along with comments explaining your approach
-def idx1(): //binary search to find the lower index
-  low=0
-  high=len(nums)-1
-  index=-1
-
-  while(low<=high):
-      mid=low+(high-low)//2
-      if(nums[mid]==target):
-          index=mid
-          high=mid-1//if the element is found decrement the right pointer 
-      elif(nums[mid]<target):
-          low=mid+1
-      else:
-          high=mid-1
-
-  return index
-
-def idx2()://binary search to find the upper index
-  low=0
-  high=len(nums)-1
-  index=-1
-
-  while(low<=high):
-      mid=low+(high-low)//2
-      if(nums[mid]==target):
-          index=mid
-          low=mid+1//if the element is found increment the left pointer 
-      elif(nums[mid]<target):
-          low=mid+1
-      else:
-          high=mid-1
-
-  return index
-    
-idx1,idx2 = idx1(), idx2()
-return [idx1, idx2]
+        
