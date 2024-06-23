@@ -1,0 +1,27 @@
+//Time Complexity: O(logn)
+//Space Complexity: O(1)
+//Approach:
+//Step1: If input is a sorted array then arr[left] would be less than arr[right]. 
+//Step2: If input is a rotated sorted , then atleast half of the array is always sorted.
+//Step3: If the mid is minimum out of (mid-1, mid, mid+1) then return the result.
+//Step4: If the leftmost value is less than mid then rightmost value will definetly be lesser than it.
+//Reason for this is step1 could have executed by now for (low< high) scenario. Advance the left pointer to mid+1.
+//Step5: In the else case advance right pointer to mid-1.
+
+class Solution {
+    public int findMin(int[] nums) {
+        int left=0;
+        int right=nums.length-1;
+        int mid=left+right/2;
+        while(left<=right){
+            mid=left+(right-left)/2;
+            if(nums[left]<=nums[right]) return nums[left];
+            else if((mid==0 || nums[mid-1] > nums[mid]) && (mid==right || nums[mid+1] >nums[mid])){
+                return nums[mid];
+            }else if(nums[left]<=nums[mid]){
+                left=mid+1;
+            }else right=mid-1;        
+        }
+        return -1;
+    }
+}
