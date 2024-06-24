@@ -1,5 +1,6 @@
 // Approach
-// 
+// We run the binary search twice and based on what we are searching 
+// we push the search to either find the first or the last element of the target
 
 #include <iostream>
 #include <vector>
@@ -49,11 +50,10 @@ public:
 
 int main(){
     Solution sol = Solution();
-    int rows = 7;
     std::vector<int> matrix = {4, 5, 6, 6, 6, 2, 3};
 
     std::vector<int> result = sol.searchRange(matrix, 6);
-    std::cout <<"True  Result case output: ["<< result[0] << "," << result[1] << "]" << std::endl;
+    std::cout <<"True Result case output: ["<< result[0] << "," << result[1] << "]" << std::endl;
 
     result = sol.searchRange(matrix, 400);
     std::cout <<"False Result case output: ["<< result[0] << "," << result[1] << "]" << std::endl;
