@@ -1,6 +1,8 @@
 // Approach
 // Following the Mihir baba's approach to always move towards the top and
-// surely we will reach the peak
+// surely we will reach the peak.
+// Using binary search as the algorithim and using the approach where we always move towards
+// the bigger number.
 
 #include <iostream>
 #include <vector>
