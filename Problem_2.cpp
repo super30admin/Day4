@@ -1,5 +1,6 @@
 // Approach
-// 
+// Using binary search as the primary algorithim and finding the logic that 
+// if current mid is smaller than the previous value then it is the minimum in the array
 
 #include <iostream>
 #include <vector>
