@@ -1,0 +1,112 @@
+Problem #1
+
+We need to use binary search to check for the first instance of the target meaning the index 
+of target - 1 won't be target. Then we need to find the second instance of target meaning the index of 
+target + 1 won't be target. To do this we need two seperate binary searches.
+
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if len(nums) == 0 or nums == None:
+            return [-1,-1]
+        first = self.binarySearchFirst(target, nums)
+        if first == -1:
+            return [-1,-1]
+        second = self.binarySearchSecond(target, nums)
+
+        return [first,second]
+    
+    def binarySearchFirst(self, target: int, nums: List[int]) -> int:
+        low = 0
+        high = len(nums) - 1
+
+        while low <= high:
+            mid = low + (high - low) // 2 
+            if nums[mid] == target:
+                if (mid == 0) or (nums[mid] != nums[mid - 1]):
+                    return mid
+                else:
+                    high = mid - 1
+            elif target > nums[mid]:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return -1
+
+    def binarySearchSecond(self, target: int, nums: List[int]) -> int:
+        low = 0
+        high = len(nums) - 1
+
+        while low <= high:
+            mid = low + (high - low) // 2 
+            if nums[mid] == target:
+                if (mid == len(nums) - 1) or (nums[mid] != nums[mid + 1]):
+                    return mid
+                else:
+                    low = mid + 1
+            elif target > nums[mid]:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return -1   
+
+
+Problem #2
+
+We need to use binary search to find the minimum number. After we split the array in the middle
+one side will be sorted and one side won't be. The minimum will lay in the not sorted side.
+We now just have to find the minimum which will be less than the elements on its right and left.
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        #check edge case
+        if len(nums) == 0 or nums == None:
+            return -1
+
+        low = 0
+        high = len(nums) - 1
+
+        while low <= high:
+            if nums[low] < nums[high]:
+                return nums[low]
+            mid = low + (high - low) // 2
+            #we know the minimum lays in the not sorted half
+            #the sorted half is where the nums[low] < nums[mid]
+            if (mid == 0 or nums[mid] < nums[mid - 1]) and (mid == len(nums) - 1 or nums[mid] < nums[mid + 1]):
+                return nums[mid]
+            #even if nums[low] is less tha nums[mid] we can skip over the 
+            #minimum if nums[low] is less than nums[high] in this case
+            #we need to return nums low
+            elif nums[low] <= nums[mid]:
+                low = mid + 1
+            else:
+                #if we are here this means its on the other half
+                high = mid - 1
+        return -1
+        
+
+Problem #3
+
+A peak element is always greater than its neighbors. To find this in log time we need to do binary search.
+So if the middle element isn't the peak then we check which side is greater and go towards that side 
+since peak will always be on the greater side and then fall down to a min.
+
+
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        if nums == None or len(nums) == 0:
+            return -1
+        
+        low = 0
+        high = len(nums) - 1
+
+        while low <= high:
+            mid = low + (high - low) // 2
+            
+            if (mid == 0 or nums[mid] > nums[mid - 1]) and (mid == len(nums)- 1 or nums[mid] > nums[mid + 1]):
+                return mid
+            elif nums[mid] < nums[mid + 1]:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return -1
