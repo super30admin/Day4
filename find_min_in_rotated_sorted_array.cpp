@@ -16,7 +16,7 @@
 #include<vector>
 
 using namespace std;
-
+// Brute force approach : O(N)
 int minRotatedArray(vector<int> &nums) {
     int minimum = INT_MAX;
     for(int i = 0; i < nums.size(); i++) {
@@ -24,11 +24,36 @@ int minRotatedArray(vector<int> &nums) {
     }
     return minimum;
 }
+
+// Binary Search
+
+int minBinarySearch(vector<int> &nums) {
+    int low = 0;
+    int high = nums.size() - 1;
+
+    while (low <= high) {
+        if (nums[low] <= nums[high]) { // Condition where everything is sorted
+            return nums[low];
+        }
+
+        int mid = (low + high)/2;
+
+        if ( mid > 0 && nums[mid] < nums[mid - 1] ) { // Mid is the minimum number
+            return nums[mid];
+        } else if (nums[low] <= nums[mid]) { // Left is sorted
+            low = mid + 1;
+        } else { 
+            high = mid - 1;
+        }
+    }
+
+}
 int main() {
 
     vector<int> nums = {4,5,6,7,1,2};
 
-    int ans = minRotatedArray(nums);
+    //int ans = minRotatedArray(nums);
+    int ans = minBinarySearch(nums);
     cout << "Minimum is " << ans << endl;
     return 0;
 }
