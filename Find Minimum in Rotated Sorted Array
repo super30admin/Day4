@@ -1,0 +1,35 @@
+class Solution {
+    public int findMin(int[] nums) {
+        //Check if the array has only one element
+        if(nums.length==1) return nums[0];
+        
+        //check if the array is sorted, in that case just return the first element
+        if(nums[0] <= nums[nums.length-1]) return nums[0];
+        
+        //initialise all the values
+        int low =0;
+        int high = nums.length-1;
+        
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            
+            //check if you have ended in a sorted sub array, return the lower i.e first element
+            if(nums[low]<=nums[high]) return nums[low];
+            
+            //check if the elemnt where you are is the minimum element
+            if((mid == 0 || nums[mid]<nums[mid-1]) && (mid == nums.length-1 || nums[mid]<nums[mid+1]))
+                return nums[mid];
+            
+            //if not check whch side to move, which is the unsorted side
+            else if(nums[low]<=nums[mid])
+                //Left is sorted so move to the right
+                low = mid+1;
+        
+        else
+            high = mid -1;
+        }
+        
+        return 12313123;
+        
+    }
+}
