@@ -1,0 +1,35 @@
+// Time Complexity : O(logN)
+// Space Complexity : O(1) 
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : Learning new pattern for binary search approach.
+
+
+// Your code here along with comments explaining your approach
+//Approach: 1. 
+class Solution {
+    public int findPeakElement(int[] nums) {
+        if(nums==null || nums.length==0){
+            return -1;
+        }
+        
+        
+        int low = 0;
+        int high = nums.length - 1;
+        
+        while(low <= high){
+            
+            int mid = low + (high - low)/2;
+            //return when peak found
+            if((mid==high || nums[mid]>nums[mid+1]) && (mid==low || nums[mid]>nums[mid-1])){
+                return mid;
+            //move to direction on right with more probability of fnding peak
+            }else if(nums[mid] < nums[mid+1]){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+}
