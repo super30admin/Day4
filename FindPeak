@@ -1,0 +1,26 @@
+//Time complexity- o(logn)
+//spac complexity - o(1)
+class Solution {
+    public int findPeakElement(int[] nums) {
+        
+        if(nums == null || nums.length == 0) return -1;
+        
+        int l =0, h = nums.length-1;
+        
+        while(l<=h){
+            // to avoid array index out of bound
+            int m = l+ (h-l)/2;
+            //check mid is the peak or not if it is then return 
+            if((m == 0 || nums[m] > nums[m-1]) && ( m == nums.length-1 || nums[m] > nums[m+1])) {
+                return m;
+            } 
+            // there are higher chances to find peak the side is higher then mid so move higher side
+            else if(m>0 && nums[m] < nums[m-1]) {
+                h = m-1;
+            } else {
+                l = m+1;
+            }
+        }
+        return -1;
+    }
+}

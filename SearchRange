@@ -1,0 +1,62 @@
+//Time complexity- o(logn)
+//spac complexity - o(1)
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        
+        if(nums == null || nums.length == 0) return new int [] {-1,-1};
+        
+        //if we try to find min and max index together we end up doing leaner search so do it one at a time
+        int firstIndex = binarySearchFirstIndex(nums,target);
+        int lastIndex = binarySearchLastIndex(nums,target);
+            
+        return new int [] {firstIndex, lastIndex};
+    }
+    
+    private int binarySearchFirstIndex(int[] nums, int target) {
+        int l = 0, h = nums.length-1;
+        
+        while(l<=h){
+            int m = l+(h-l)/2;
+            //if m is target then check is it grather thn the m-1 if yes return
+            if(target == nums[m]){
+                if(m== 0 || nums[m]>nums[m-1]){
+                    return m;
+                } 
+                //else move to hight to m-1
+                else {
+                    h = m-1;
+                }
+            } 
+            //if nums[m] is grather thn the target move high to m-1
+            else if(target<nums[m]){
+                h = m-1;
+            }  else{
+                l = m+1;
+            }
+        }
+        return -1;
+    }
+    
+    private int binarySearchLastIndex(int[] nums, int target) {
+        int l = 0, h = nums.length-1;
+        
+        while(l<=h){
+            int m = l+(h-l)/2;
+            //if target is nums[m] check nums[m+1] grather thn nums[m] return 
+            if(target == nums[m]){
+                if(m == nums.length-1 || nums[m]<nums[m+1]){
+                    return m;
+                } 
+                //else your last index is in the right side of array so move low to m+1
+                else {
+                    l = m+1;
+                }
+            } else if(target>nums[m]){
+                l = m+1;
+            }  else{
+                h = m-1;
+            }
+        }
+        return -1;
+    }
+}

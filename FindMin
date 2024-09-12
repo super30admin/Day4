@@ -1,0 +1,30 @@
+//time com - o(logn)
+//space com - o(1)
+//leetcode -Yes
+class Solution {
+    
+    public int findMin(int[] nums) {
+        
+        if(nums == null || nums.length == 0) return -1;
+        int n= nums.length;
+        
+        int l =0, h = n-1;
+        
+        while(l<=h){
+            //if array is sorted thn return low 
+            if(nums[l] < nums[h])  return nums[l];
+            int m = l+(h-l)/2;
+            //check mid is the min element
+            if((m == 0 || nums[m]<nums[m-1]) && (m == n-1 || nums[m]<nums[m+1])) {
+                return nums[m];
+            }
+            //one part will be always sorted but our min will be on the other side
+            else if(nums[l] <= nums[m]) {
+                l = m+1;
+            } else {
+                h = m-1;
+            }
+        }
+        return -1;
+    }
+}
