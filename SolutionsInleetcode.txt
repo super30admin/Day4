@@ -1,0 +1,5 @@
+1) https://leetcode.com/submissions/detail/513223854/    (Time will be 0(n) in worst case we are searching through the array, Space 0(1))
+                                    
+2) https://leetcode.com/submissions/detail/513224433/ (Time O(log n) Space 0(1))
+
+3) https://leetcode.com/submissions/detail/513223754/ (Time O(n)as we are searching through the array, Space 0(1))
