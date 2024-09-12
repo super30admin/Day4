@@ -1,0 +1,53 @@
+  
+// Time Complexity :O(2 logn)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :No
+
+
+// Your code here along with comments explaining your approach
+
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+    def findFirst(self,nums,target):
+        low = 0
+        high= len(nums)-1
+        while(low<=high):
+            mid = low + (high-low)/2
+            if(nums[mid]== target):
+                if(low == mid   or nums[mid-1] <nums[mid]):
+                    return mid
+            elif nums[mid]>target:
+                high=mid-1
+            else:
+                low= mid+1
+                
+        return -1
+    def findLast(self,nums,target):
+        low = 0
+        high= len(nums)-1
+        while(low<=high):
+            mid = low + (high-low)/2
+            if(nums[mid]== target):
+                if(high == mid or nums[mid+1] >nums[mid]):
+                    return mid
+            elif nums[mid]>target:
+                high=mid-1
+            else:
+                low= mid+1
+                
+        return -1
+    def searchRange(self, nums, target):
+        findex = self.findFirst(nums,target)
+        lindex = self.findLast(nums,target)
+        return [findex,lindex]
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
