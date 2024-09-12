@@ -1,0 +1,32 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def findFirstPosition(A, n, target):
+            l = 0
+            h = n - 1
+            while (l <= h):
+                m = l + (h - l) // 2
+                if ((m == 0 or A[m - 1] < target) and A[m] == target):
+                    return m
+                elif (target > A[m]):
+                    l = m + 1
+                else:
+                    h = m - 1
+            return -1
+        def findLastPosition(A, n, target):
+            l = 0
+            h = n - 1
+            while (l <= h):
+                m = l + (h - l) // 2
+                if ((m == n - 1 or A[m + 1] > target) and A[m] == target):
+                    return m
+                elif (target < A[m]):
+                    h = m - 1
+                else:
+                    l = m + 1
+            return -1
+        first = findFirstPosition(nums, len(nums), target)
+        last = findLastPosition(nums, len(nums),target)
+        return [first, last]
+# Time Complexity: O(logn)
+# Space Compexity: O(1)
+        

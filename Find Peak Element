@@ -1,0 +1,12 @@
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        first, last = 0, len(nums) - 1
+        while (first < last):
+            m = first + (last - first) // 2
+            if nums[m] > nums[m + 1]:
+                last = m
+            else:
+                first = m + 1
+        return first
+  # Time Complexity: Olog(n)
+  # Space Complexity: O(1)
