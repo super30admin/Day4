@@ -1,0 +1,52 @@
+/* [1,7,7,7,7,9,10, 10]  
+-> Since the array is sorted, we can use the fact that the element left of first occurence will always be smaller the first occurence or first occurence will be 0th index.
+-> element right of last occurence will be always greater that the last occurence or last ocuurence itself is the last element of array.
+
+/* time complexity: O(logn) : 2 binary searches, space complexity: O(1)*/
+// Yes, I solved on leetcode
+
+class Solution {
+/* we check for first occurence  and 2nd occurence using the flag defined in the function*/
+    public int occurence(int[] nums, int low, int high, int target,boolean left){
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            if(nums[mid] == target){ // whenerver we see mid value == target, check the value of flag 
+                if(left){ // leftmost occurence
+                    if(mid == 0 || nums[mid-1] < nums[mid]) return mid;
+                    else
+                        high = mid-1;
+                 }
+                else{//rightmost occurence
+                    if(mid == nums.length-1 || nums[mid+1] > nums[mid]) return mid;
+                  else
+                    low = mid+1;
+                }
+            }
+             else if(nums[mid] > target) 
+                high = mid-1;
+            else if(nums[mid] < target)
+                low = mid + 1;
+        }
+        return -1;
+    }
+
+    public int[] searchRange(int[] nums, int target) {
+        // edge cases
+         int[] result = {-1, -1};
+        if(nums.length == 1 && target == nums[0])  // if there is only one element
+            return new int[]{0,0}; // only one occurence possible
+           
+       boolean left = false;
+        int first = occurence(nums, 0, nums.length-1, target, true); // search for 1st occurence
+      
+        
+        if(first != -1){
+            result[0] = first;
+        int second = occurence(nums, 0, nums.length-1, target, false); //search for second occurence
+            if(second != -1)
+                result[1] = second;
+           }
+       
+        return result;
+    }
+}

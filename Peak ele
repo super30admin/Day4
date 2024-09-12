@@ -1,0 +1,18 @@
+// brute force way, we search for peak element, where nums[i]> nums[i+1] we return i;
+time complexity: O(logn);
+space complexity: O(1)
+yes, I have solved on leetcode
+class Solution {
+    public int findPeakElement(int[] nums) {
+      int low = 0;
+       int high = nums.length-1;
+       while(low < high){
+        int mid = low + (high-low)/2;
+        if(nums[mid] > nums[mid+1]) // we need to serach left (including mid),  mid == peak is possible
+            high = mid;
+        else
+            low = mid+1; // if nums[mid] not greater than mid+1, we need to search right we area in sorted array, mid can  be never peek, leave it, go right 
+       }
+        return low;
+    }
+}

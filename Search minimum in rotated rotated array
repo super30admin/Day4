@@ -1,0 +1,26 @@
+Time complexity: O(log n)
+space complexity: O(n)
+yes, i have solved on leetcode
+class Solution {
+    public int findMin(int[] nums) 
+    {
+        int low = 0;
+        int high = nums.length - 1;
+        if(nums[low] <= nums[high]) // is array is already sorted or has one element
+            return nums[low];
+        
+        while(low < high)
+        {
+           int mid = low + (high-low)/2;
+            if(nums[mid] > nums[mid+1]) // mid+1 is smaller element
+                return nums[mid+1]; // we found minimum element
+            else if(nums[mid] > nums[low]) // we are in sorted array, left is sorted
+                  low = mid+1;  //move right
+            else
+                high = mid; //else minimum can be in left or minimum can be mid
+            
+        }
+        return nums[low];
+        
+    }
+}
