@@ -19,6 +19,51 @@ Example 2:
 Input: nums = [5,7,7,8,8,10], target = 6
 Output: [-1,-1]
 
+**Code:**
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        if(nums == null || nums.length == 0)
+            return new int[]{-1,-1};
+        int first = binarySearch(nums,target,false);
+        int last = binarySearch(nums,target,true);
+        return new int[]{first,last};
+    }
+        private int binarySearch(int[]nums,int target,boolean last){
+            int lo = 0;
+            int hi = nums.length-1;
+            while(lo <= hi){
+                int mid= lo + (hi-lo)/2;
+                if(nums[mid] == target){
+                //equals to target
+                //first occurance
+                    if(!last){
+                        if(mid == 0||nums[mid]>nums[mid-1])
+                            return mid;
+                        else
+                            hi = mid-1;
+                    }
+                    else{
+                        if(mid == nums.length-1||nums[mid]<nums[mid+1])
+                            return mid;
+                        else
+                            lo = mid+1;
+                    }
+                }
+                //last occurance
+                    
+                else if (nums[mid]>target){
+                    hi = mid-1;
+                }
+                else {
+                    lo = mid+1;
+                }
+                }
+            return -1;
+        }
+   
+}
+    
 ## Problem 2: (https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
 
 Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
@@ -61,5 +106,32 @@ Explanation: Your function can return either index number 1 where the peak eleme
 Note:
 
 Your solution should be in logarithmic complexity.
+
+**CODE:**
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        if(nums == null || nums.length == 0)
+            return -1;
+        int lo = 0;
+        int hi = nums.length -1;
+        while(lo<=hi){
+            int mid = lo+(hi-lo)/2;
+            //Peak finding
+            if((mid == 0||nums[mid]>nums[mid-1])&& 
+               (mid == nums.length-1||nums[mid]>nums[mid+1])){
+                return mid;
+                }
+            else if(mid > 0 && nums[mid]< nums[mid-1]){
+                hi = mid-1;
+            }
+            else{
+                lo = mid+1;
+            }
+}
+        return -1;
+        
+    }
+}
 
 
