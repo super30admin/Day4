@@ -1,0 +1,62 @@
+Find First and Last Position of Element in Sorted Array
+#TimeComplexity:O(n)
+#SpaceComplexity:O(1)
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        low = 0
+        high = len(nums) - 1
+        
+        if len(nums) == 0:
+            return [-1, -1]
+        
+        while (low < high):
+            mid = low + ((high - low)//2)
+            
+            if target > nums[mid]:
+                low = mid + 1
+            else:
+                high = mid
+                
+        if target == nums[low]:
+            i = nums.count(target)
+            return [low, low+i-1]
+        
+        else:
+            return [-1, -1]
+
+
+Find Minimum in Rotated Sorted Array
+#TimeComplexity: O(logn)
+#SpaceComplexity: O(1)
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        if len(nums) == 1 or nums[0] < nums[-1]:
+            return nums[0]
+
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            if mid > 0 and nums[mid - 1] > nums[mid]:  # The nums[mid] is the minimum number
+                return nums[mid]
+            if nums[mid] > nums[right]:  # search on the right side, because smaller elements are in the right side
+                left = mid + 1
+            else:
+                right = mid - 1  # search the minimum in the left side
+
+        
+Find Peak Element
+#timeComplexity: O(logn)
+#spaceComplexity: O(1)
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        n = len(nums)
+        left, right = 0, n - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if (mid == 0 or nums[mid-1] < nums[mid]) and (mid == n-1 or nums[mid] > nums[mid+1]):  # Found peak
+                return mid
+            if mid == 0 or nums[mid-1] < nums[mid]:  # Find peak on the right
+                left = mid + 1
+            else:  # Find peak on the left
+                right = mid - 1
+        return -1
