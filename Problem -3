@@ -1,0 +1,20 @@
+class Solution {
+    public static void main(String [] args){
+        int[] nums= new int []{1,2,3,1};
+        findPeakElement(nums);
+    }
+    public int findPeakElement(int[] nums) {
+        // int res=0;
+        int high= nums.length-1;
+        int low=0;
+        
+        while(low<high){
+            int mid= low + (high-low)/2;
+            if(nums[mid]<nums[mid+1]){
+               low= mid+1;
+            }
+            else high= mid;
+        }
+        return low;
+    }
+}
