@@ -1,0 +1,50 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        if(nums == null || nums.length==0)
+            return new int[]{-1,-1};
+        
+        if(target < nums[0] || target > nums[nums.length -1])
+           return new int[]{-1,-1};
+        
+        int lowerBound = BinarySearch(nums, target, true);
+        int upperBound = BinarySearch(nums, target, false);      
+        return new int[]{lowerBound, upperBound};
+               
+    }
+    
+    public int BinarySearch(int[] nums, int target,boolean isFirst){
+        int low = 0; int high = nums.length - 1; 
+        int mid = 0;
+        
+        while(low<=high){
+            mid  = low + (high-low)/2;
+            if(nums[mid] == target){
+                if(isFirst == true){
+                    if(low == mid || nums[mid-1]!=target){
+                        return mid;
+                    }
+                    
+                        high=mid-1;
+                                      
+                }
+                else{
+                    if(high==mid || nums[mid+1]!=target){
+                        return mid;
+                    }
+                    
+                        low = mid + 1;
+                    
+                    
+                }
+            }
+            else if(nums[mid]>target){
+                high = mid-1;
+            }
+            else{
+                low = mid +1;
+            }
+            
+        }
+        return -1;
+    }
+}
