@@ -1,0 +1,137 @@
+// Time Complexity : O(log(n))
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : 
+
+
+// Your code here along with comments explaining your approach
+
+1. Given an sorted array, find the first and last position of a given element.
+
+Your algorithm's runtime complexity must be O(log n).
+
+If the target is not found in the array, return [-1, -1].
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        if(nums == null || nums.length == 0)
+            return new int[] {-1,-1};
+        if(nums[0]>target || nums[nums.length-1]<target)
+            return new int[] {-1,-1};
+        int first = binarySearchFirst(nums, target);
+        int last = binarySearchLast(nums, target);
+        return new int[] {first,last};
+    }
+    
+    private int binarySearchFirst(int[] nums, int target){
+        int low = 0;
+        int high = nums.length-1;
+        
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(nums[mid] == target){
+                if(mid == 0 || nums[mid]>nums[mid-1])
+                    return mid;
+                else
+                    high = mid-1;
+            }
+            else if(nums[mid]>target){
+                high = mid-1;
+            }
+            else
+                low = mid+1;
+        }
+        return -1;
+    }
+    
+    private int binarySearchLast(int[] nums, int target){
+        int low = 0;
+        int high = nums.length-1;
+        
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(nums[mid] == target){
+                if(mid == nums.length-1 || nums[mid]<nums[mid+1])
+                    return mid;
+                else
+                    low = mid+1;
+            }
+            else if(nums[mid]>target){
+                high = mid-1;
+            }
+            else
+                low = mid+1;
+        }
+        return -1;
+    }
+    
+}
+
+// Time Complexity : O(log(n))
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : 
+
+// Your code here along with comments explaining your approach
+
+ 2. A peak element is an element whose value is greater than both of its neighbors.
+
+Provided an input array nums, such that nums[i] ≠ nums[i+1], find a peak element and return its index.
+
+The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
+
+You may imagine that nums[-1] = nums[n] = -∞.
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int low = 0;
+        int high = nums.length-1;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            if((mid == nums.length-1 || nums[mid] > nums[mid+1]) && (mid == 0 || nums[mid] > nums[mid-1])){
+                return mid;
+            }
+            else if(mid > 0 && nums[mid] < nums[mid-1]){
+                high = mid-1;
+            }
+            else
+                low = mid + 1;
+        }
+        return -1;
+    }
+}
+
+
+// Time Complexity : O(log(n))
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : 
+
+// Your code here along with comments explaining your approach
+
+3. Given a sorted array rotated at some pivot.
+
+(i.e.,  [0,1,2,4,5,6,7] might become  [4,5,6,7,0,1,2]).
+
+Find the minimum element in the array given that there are no duplicate elements in the array.
+
+class Solution {
+    public int findMin(int[] nums) {
+        int low = 0;
+        int high = nums.length-1;
+        if(nums == null || nums.length == 0)
+            return -1;
+        while(low<=high){
+            if(nums[low] < nums[high])
+                return nums[low];
+            int mid = low + (high - low)/2;
+            if((mid == 0 || nums[mid] < nums[mid - 1]) && (mid == nums.length-1 || nums[mid] < nums[mid + 1]))
+                return nums[mid];
+            else if(nums[low] <= nums[mid])
+                low = mid + 1;
+            else
+                high = mid - 1;   
+        }
+        return -1;
+    }
+}
