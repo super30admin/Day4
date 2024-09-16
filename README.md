@@ -2,64 +2,165 @@
 Explain your approach in **three sentences only** at top of your code
 
 
-## Problem 1: (https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+## Problem 1: Find First and Last Position of Element in Sorted Array
 
-Given an array of integers nums sorted in ascending order, find the starting and ending position of a given target value.
+```Java
+// Time Complexity : O(log n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
 
-Your algorithm's runtime complexity must be in the order of O(log n).
+import java.util.*;
 
-If the target is not found in the array, return [-1, -1].
+class Solution {
+    private static int binarySearchLast(int[] nums, int low, int high, int target){
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            
+            if(nums[mid] == target){
+                if(mid == nums.length-1 || nums[mid] < nums[mid+1]){
+                    return mid;
+                }
+                else{
+                    //keep moving right
+                    low=mid+1;
+                }
+            }
+            else if(nums[mid] < target){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        return -1;
+    }
+    private static int binarySearchFirst(int[] nums, int target){
+        int low=0;
+        int high=nums.length;
+        
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(nums[mid]==target){
+                if(mid == 0 || nums[mid]>nums[mid-1]){
+                    return mid;
+                }
+                else{
+                    //we have to search the left part
+                    high=mid-1;                
+                }
+            }
+            else if(nums[mid]<target){
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }        
+        return -1;
+    }
+    public int[] searchRange(int[] nums, int target) {
+        //validate for null
+        if(nums == null || nums.length == 0)
+            return new int[]{-1, -1};
+        
+        //validate if target < first element OR if target > the last element
+        if(nums[0] > target || nums[nums.length-1] < target)
+            return new int[]{-1, -1};
+        
+    
+        int first = binarySearchFirst(nums, target);
+        
+        if(first == -1)
+            return new int[]{-1, -1};
+        
+        int last = binarySearchLast(nums, first, nums.length-1, target);
+        
+        return new int[]{first, last};
+        
+    }
+}
+```
 
-Example 1:
+## Problem 2: Find Minimum in Rotated Sorted Array
 
-Input: nums = [5,7,7,8,8,10], target = 8
-Output: [3,4]
-Example 2:
+```Java
+// Time Complexity : O(log n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
 
-Input: nums = [5,7,7,8,8,10], target = 6
-Output: [-1,-1]
+import java.util.*;
 
-## Problem 2: (https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+class Solution {
+    public int findMin(int[] nums) {
+        //check null
+        if(nums == null || nums.length==0){
+            return -1;
+        }
 
-Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+        int low=0;
+        int high=nums.length-1;
 
-(i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]).
+        while(low<=high){
+            if(nums[low]<=nums[high]){ //already sorted
+                return nums[low];
+            }
 
-Find the minimum element.
+            int mid=low+(high-low)/2;
+            //check id mid is minimum
+            if((mid==0 || nums[mid]<nums[mid-1]) && (mid==nums.length-1 || nums[mid]<nums[mid+1])){
+                return nums[mid];
+            }
+            else if(nums[low] <= nums[mid]){ //check if sorted
+                low=mid+1; //if not, go to unsorted side
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        return -1;
+    }
+}
+```
 
-You may assume no duplicate exists in the array.
+## Problem 3: Find Peak Element
 
-Example 1:
-Input: [3,4,5,1,2]
-Output: 1
+```Java
+// Time Complexity : O(log n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
 
-Example 2:
-Input: [4,5,6,7,0,1,2]
-Output: 0
+import java.util.*;
 
-## Problem 3: (https://leetcode.com/problems/find-peak-element/)
-A peak element is an element that is greater than its neighbors.
-
-Given an input array nums, where nums[i] ≠ nums[i+1], find a peak element and return its index.
-
-The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
-
-You may imagine that nums[-1] = nums[n] = -∞.
-
-Example 1:
-
-Input: nums = [1,2,3,1]
-Output: 2
-Explanation: 3 is a peak element and your function should return the index number 2.
-Example 2:
-
-Input: nums = [1,2,1,3,5,6,4]
-Output: 1 or 5 
-Explanation: Your function can return either index number 1 where the peak element is 2, 
-
-             or index number 5 where the peak element is 6.
-Note:
-
-Your solution should be in logarithmic complexity.
+class Solution {
+    public int findPeakElement(int[] nums) {
+        //check for null
+        if(nums == null || nums.length == 0)
+            return -1;
+        
+        int low=0;
+        int high=nums.length-1;
+        
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            //check if mid is the peak
+            if((mid==0 || nums[mid]>nums[mid-1]) && (mid == nums.length-1 || nums[mid]>nums[mid+1])){
+                return mid;
+            }
+            //left search
+            else if(mid>0 && nums[mid-1]>nums[mid]){
+                high=mid-1;
+            }
+            else{
+                //right search
+                low=mid+1;
+            }
+        }
+        return -1;
+    }
+}
+```
 
 
