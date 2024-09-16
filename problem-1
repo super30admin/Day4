@@ -1,0 +1,35 @@
+// Time Complexity :O(mlogn)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        
+        int low=0;
+        int high=nums.length-1;
+        int[] arr={-1,-1};
+        while(low<=high){
+            int mid=low+((high-low)/2);
+            if(nums[mid]==target){
+                int tmp=mid;
+                while(tmp-1>=0 && nums[tmp-1]==target){
+                    tmp--;
+                }
+                int tmpEnd=mid;
+                while(tmpEnd+1<nums.length && nums[tmpEnd+1]==target){
+                    tmpEnd++;
+                }
+                arr[0]=tmp;
+                arr[1]=tmpEnd;
+                return arr;
+            }
+            else if(nums[mid]<target){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return arr;
+        
+    }
+}
