@@ -1,0 +1,44 @@
+class Solution:
+    # leetcode URL : https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+    # Problem : 34. Find First and Last Position of Element in Sorted Array
+	# Time Complexity : 3*O(log n) = O(log n)
+	# Space Complexity : O (1)
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        s = 0
+        sr = 0
+        e = len(nums)-1
+        el = len(nums)-1
+        ret = [-1,-1]
+        
+        while(s<=e): # bsearch to find the target
+            m = int((s+e)/2)
+            if nums[m] == target:
+                ret[0] = m
+                ret[1] = m
+                el  = m-1
+                sr = m+1
+                break
+            if target<nums[m]:
+                e = m-1
+            else:
+                s = m+1
+        
+        while(s<=el): # left of target
+            m = int((s+el)/2)
+            if nums[m] == target:
+                ret[0]= m
+                el = m-1
+            else:
+                s = m+1
+                
+        while(sr<=e): # right of target
+            m = int((sr+e)/2)
+            if nums[m] == target:
+                ret[1]= m
+                sr = m+1
+            else:
+                e = m-1
+        
+        return ret
+        
+                

@@ -1,0 +1,20 @@
+class Solution:
+    # leetcode URL : https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/submissions/
+    # Problem : 153. Find Minimum in Rotated Sorted Array
+	# Time Complexity : O(log n)
+	# Space Complexity : O (1)
+    def findMin(self, nums: List[int]) -> int:
+        s = 0
+        e = len(nums)-1
+    
+        while s<=e:
+            if nums[s]<=nums[e]: # already sorted array
+                return nums[s]
+            m = int((s+e)/2)
+            if m!=0 and nums[m-1]>nums[m]:
+                return nums[m]
+            if nums[s]<=nums[m]: # left sorted then least element lies on the right
+                s = m+1
+            else: # right sorted then min lies on the left
+                e = m-1
+        return -1
