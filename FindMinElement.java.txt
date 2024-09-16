@@ -1,0 +1,43 @@
+/******************************************************************************
+Time Complexity - O(log N)
+*******************************************************************************/
+public class Main
+{
+	public static void main(String[] args) {
+	    Main m = new Main();
+	    int arr[] = { 5, 6, 1, 2, 3, 4 };
+        if(arr.length == 0) return;
+	    int start = 0;
+	    int end =  arr.length - 1;
+	    int minElement = m.FindMinElement(arr, start, end);
+	    System.out.println(minElement);
+	}
+	
+	
+	private int FindMinElement(int arr[], int start, int end)
+	{
+	    
+	    while(start <= end)
+	    {
+	        int mid = start + (end - start) / 2;
+	        if(arr[start] <= arr[end])
+	        {
+	               return arr[start];
+	        }
+	        if((mid == 0 || arr[mid] < arr[mid - 1]) && 
+	            (mid == arr.length - 1 || arr[mid] < arr[mid + 1] )) 
+	        {
+	            return arr[mid];
+	        }
+	        else if(arr[start] <= arr[mid])
+	        {
+	           start = mid + 1;
+	        }
+	        else
+	        {
+	            end = mid - 1;
+	        }
+	    }
+	    return -1;
+	}
+}
