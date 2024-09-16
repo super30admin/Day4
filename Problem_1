@@ -1,0 +1,48 @@
+// Find First and Last Position of Element in Sorted Array
+/**
+Time Complexity : O(log(n))
+Space Complexity : O(1)
+Algorithm : 
+1. Given sorted array, so taking advantage of binary serach 
+2. set low to 0 and high to length -1 and find mid.
+3. apply 2 different binary search.
+3. First binary search to find extreame left boundary :: If mid is equal to given target then search left space
+  a. If mid-1 element is less than mid , then we found the leftmost boundary and end search here and return mid.
+  b. Else, apply separate binary search here again and make high pointer to mid-1.
+4. If mid is not equal to target, then check if mid is less than target, then move low to mid = 1 or move high to mid - 1.
+5. Similarly, second binary search to find extreame right boundary :: If mid is equal to given target then search right space
+  a. If mid+1 element is greater than mid , then we found the rightmost boundary and end search here and return mid.
+  b. Else, apply separate binary search here again and make high pointer to mid-1.
+6. Check boundary conditions in left and right space to avoid IndexOutOfBoundError.
+*/
+class Solution {
+    private int binarySearch(int[] nums, int target, boolean isLeft){
+        int low = 0; int high = nums.length - 1;
+        while(low<=high){
+            int mid = low + (high - low)/2;
+            if(nums[mid] == target){
+                if(isLeft){
+                    if(mid == 0 || nums[mid] > nums[mid - 1])
+                        return mid;
+                    else
+                        high = mid - 1;
+                }else{
+                    if(mid == nums.length -1 || nums[mid] < nums[mid + 1])
+                        return mid;
+                    else
+                        low = mid + 1;
+                }
+            }else if(nums[mid] > target){
+                high = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+        }
+        return -1;
+    }
+    public int[] searchRange(int[] nums, int target) {
+        if(nums == null || nums.length == 0)
+            return new int[] {-1, -1};
+        return new int[] {binarySearch(nums, target, true), binarySearch(nums, target, false)};
+    }
+}

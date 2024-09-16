@@ -1,0 +1,31 @@
+/**
+Find minimun in rotated array
+Time Complexity : O(log(n))
+Space Complexity : O(1)
+1. Take advantage of sorted array and apply binary search
+2. There will be 2 parts in the array, one is sorted and another is unsorted. Pivot will be always in the unsorted. Hence,
+  minimum will also be in always unsorted part.
+3. So after applying binary search find a unsorted part and then search for min element in unsorted part.
+4. The minimum element will be less than its both left and right neighbor.
+5. For edge cases, if in array low element is less than high then simply return low.
+6. Also, check corener cases like array out of bound.
+*/
+class Solution {
+    public int findMin(int[] nums) {
+        if(nums == null || nums.length == 0)
+            return -1;
+        int low = 0; int high = nums.length - 1;
+        while(low <= high){
+            if(nums[low] < nums[high])
+                return nums[low];
+            int mid = low + (high - low) / 2;
+            if((mid == 0 || nums[mid] < nums[mid-1]) && (mid == nums.length - 1 || nums[mid] < nums[mid+1]))
+                return nums[mid];
+            else if(nums[low] <= nums[mid])
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }
+        return -1;
+    }       
+}
