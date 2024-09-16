@@ -1,0 +1,173 @@
+Problem 32(first and last position)
+Time complexity-O(logn)
+Space complexity- constant
+class Solution {
+    
+    public int[] searchRange(int[] nums, int target) {
+        
+        //null case
+        //run b.s
+            //find mid
+        //run 2 b.s
+        int low,high;
+        low=0;
+        high=nums.length-1;
+        int first= firstbs(nums, target,low,high);
+        int second= secondbs(nums, target,low,high);
+        return new int[]{first,second};
+        
+        
+        
+        
+        
+    }
+    public int firstbs(int[] nums, int target,int low,int high)
+        {
+            while(low<=high)
+            {
+                int mid=low+(high-low)/2; //to prevent integer overflow
+                if(nums[mid]==target)
+                {
+                    if(mid!=0 && nums[mid]==nums[mid-1])
+                    {
+                        high=mid-1;
+                    }
+                    else
+                    {
+                        
+                        return mid;
+
+                    }
+
+                }
+                else if(nums[mid]>target)
+                {
+                    high=mid-1;
+                }
+                else
+                {
+                    low=mid+1;
+                }
+
+            }
+        return -1;
+        }
+    public int secondbs(int[] nums, int target,int low,int high)
+        {
+            while(low<=high)
+            {
+                int mid=low+(high-low)/2; //to prevent integer overflow
+                if(nums[mid]==target)
+                {
+                    if(mid!=nums.length-1 &&nums[mid]==nums[mid+1])
+                    {
+                        low=mid+1;
+                    }
+                    else
+                    {
+                        
+                        return mid;
+
+                    }
+
+                }
+                else if(nums[mid]>target)
+                {
+                    high=mid-1;
+                }
+                else
+                {
+                    low=mid+1;
+                }
+
+            }
+        return -1;
+        }
+}
+
+
+
+
+Problem 162(Find peak element)
+Time complexity-O(logn)
+Space complexity- constant
+
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        //null case
+        //run b.s
+        if(nums==null || nums.length==0) return -1;
+        int low,high;
+        low=0;
+        high=nums.length-1;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if((mid==0|| nums[mid]>nums[mid-1] )&& ((mid==nums.length-1)||nums[mid]>nums[mid+1]))
+            {
+                return mid;
+            }
+            else if(mid!=0 && nums[mid]<nums[mid-1])
+            {
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+            
+            
+        }
+        return 1234;
+        
+    }
+}
+
+
+
+
+Problem 702(Search in a sorted array of unknown size)
+Time complexity-O(logn)
+Space complexity- constant
+
+/**
+ * // This is ArrayReader's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * interface ArrayReader {
+ *     public int get(int index) {}
+ * }
+ */
+
+class Solution {
+    public int search(ArrayReader reader, int target) {
+        int low=0;
+        int high=1;
+        while(reader.get(high)<target)
+        {
+            low=high;
+            high=high*2;
+        }
+        return binarysearch(reader,target,low,high);
+    }
+    public int binarysearch(ArrayReader reader, int target, int low, int high)
+    {
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(reader.get(mid)==target)
+            {
+                return mid;
+            }
+            else if(target> reader.get(mid))
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        return -1;
+    }
+}
