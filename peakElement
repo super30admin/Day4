@@ -1,0 +1,18 @@
+Time Complexity: O(log n) since we are using Binary Search
+Space Complexity: O(n)
+
+class Solution {
+	public int findPeakElement(int[] nums) {
+		return binSearch(nums, 0, nums.length-1);
+	}
+
+	public int binSearch(int[] nums, int l, int r)
+	{
+		if(l==r)
+			return l;
+		int mid = (l + r)/2;
+		if(nums[mid] > nums[mid+1]) 
+			return binSearch(nums, l, mid);
+		return binSearch(nums, mid+1, r);
+	}
+}
