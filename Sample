@@ -1,0 +1,134 @@
+// Problem 1
+// Time Complexity : O(logn)
+// Space Complexity : O(1) -> No extra space needed
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+// Algorithm
+// 1 - find left most index
+// 2 - find right most index
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int[] result = new int[2];
+        result[0] = findFirst(nums, target);
+        result[1] = findLast(nums, target);
+        
+        return result;
+    }
+    
+    // 1
+    public int findFirst(int[] nums, int target) {
+        int index = -1;
+        int start = 0;
+        int end = nums.length - 1;
+        
+        while(start <= end) {
+            int mid = (start + end) / 2;
+            if (nums[mid] >= target) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+            if (nums[mid] == target) {
+                index = mid;
+            }
+        }
+        
+        return index;
+    }
+    
+    // 2
+    public int findLast(int[] nums, int target) {
+        int index = -1;
+        int start = 0;
+        int end = nums.length - 1;
+        
+        while(start <= end) {
+            int mid = (start + end) / 2;
+            if (nums[mid] <= target) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+            if (nums[mid] == target) {
+                index = mid;
+            }
+        }
+        
+        return index;
+    }
+}
+
+// Problem 2
+// Time Complexity : O(logn)
+// Space Complexity : O(1) -> No extra space needed
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+// Algorithm
+// 1 - initiliaze pointers
+// 2 - while loop
+// 3 - conditions for mid element greater than end, move right else move left
+// 4 - return the element at start
+class Solution {
+    public int findMin(int[] nums) {
+        // 1
+        int start = 0;
+        int end = nums.length - 1;
+        
+        // 2
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            
+            // 3
+            if (nums[mid] > nums[end]) {
+                start = mid + 1;
+            } else {
+                end = mid;
+            }
+        }
+        
+        // 4
+        return nums[start];
+    }
+}
+
+// Problem 3
+// Time Complexity : O(logn)
+// Space Complexity : O(1) -> No extra space needed
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+// Algorithm
+// 1 - initiliaze pointers
+// 2 - while condition
+// 3 - compare mid and mid+1 element
+// 4 - return start index
+class Solution {
+    public int findPeakElement(int[] nums) {
+        // 1
+        int start = 0;
+        int end = nums.length - 1;
+        
+        // 2
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+
+            // 3
+            if (nums[mid] < nums[mid+1]) {
+                start = mid + 1;
+            } else {
+                end = mid;
+            }
+        }
+        
+        // 4
+        return start;
+    }
+}
