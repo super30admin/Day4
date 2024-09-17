@@ -1,0 +1,57 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+            int a = lower(nums,target);
+          
+            int b = higher(nums,target);
+            return {a,b};
+        }
+        
+         int lower(vector<int>& nums,int target){
+            int low = 0;
+            int n = nums.size();
+            int high= n-1;
+            while(low<=high){
+             int mid = low + (high-low)/2;
+     
+                if(nums[mid]==target) {
+                    if(mid == 0 || nums[mid]>nums[mid-1] )
+                    {
+                        return mid;
+                    }else{
+                high = mid-1;
+                }}
+                else if(nums[mid]>target){
+                    high = mid-1;
+                }
+                else{
+                    low= mid+1;
+                }
+                }
+        return -1;
+        }
+        
+         int higher(vector<int>& nums, int target){
+                   int low = 0;
+                   int n = nums.size();
+                   int high= n-1;
+        while(low<=high){
+             int mid = low + (high-low)/2;
+                if(nums[mid] == target){
+                
+                    if(mid == high || nums[mid]<nums[mid+1])
+                    {return mid;}
+                    else{
+                        low = mid+1;
+                    }
+                }
+                 if(nums[mid]>target){
+                    high = mid-1;
+                }
+                else{
+                    low= mid+1;
+                }
+                }
+    return -1;
+        }
+};
