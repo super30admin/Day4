@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        
+        int low = 0, high = nums.size()-1;
+        int lowValue = nums[0];
+        while(low<high) {
+            int mid = low + (high-low)/2;
+            
+            if(nums[high]<nums[mid]){
+                low = mid + 1;
+                lowValue= nums[low];
+            }
+            else {
+                high = mid;
+                lowValue=nums[high];
+            } 
+                
+
+            
+        }
+        return lowValue;
+        
+    }
+};
