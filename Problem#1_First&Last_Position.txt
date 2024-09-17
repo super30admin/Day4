@@ -1,0 +1,49 @@
+// Time Complexity : 0(logn)
+// Space Complexity : 0(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+     // 2 pass binary search        
+     int[] result = new int[2];
+    result[0] = findFirst(nums, target);
+    result[1] = findLast(nums, target);
+    return result;
+}
+
+private int findFirst(int[] nums, int target){
+    int idx = -1;
+    int start = 0;
+    int end = nums.length - 1;
+   // Here in binary search i try to find the first position of the element
+    while(start <= end){
+        int mid = (start + end) / 2;
+        if(nums[mid] >= target){ /// if nums[mid] value is greater than or equal to target then target is avaiable on the left side of the mid
+            end = mid - 1;
+        }else{
+            start = mid + 1;
+        }
+        // if nums[mid] == target store the index, incase if the target might not occur in further part
+        if(nums[mid] == target) idx = mid;
+    }
+    return idx;
+}
+
+private int findLast(int[] nums, int target){
+    int idx = -1;
+    int start = 0;
+    int end = nums.length - 1;
+     // Here in binary search i try to find the first position of the element
+    while(start <= end){
+        int mid = (start + end) / 2;
+        if(nums[mid] <= target){/// if nums[mid] value is less than or equal to target then target is avaiable on the left side of the mid
+            start = mid + 1;
+        }else{
+            end = mid - 1;
+        }
+        if(nums[mid] == target) idx = mid;
+    }
+    return idx;
+}
+}

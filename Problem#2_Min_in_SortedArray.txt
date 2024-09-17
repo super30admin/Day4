@@ -1,0 +1,48 @@
+// Time Complexity : 0(log n)
+// Space Complexity : 0(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+class Solution {
+    public int findMin(int[] nums) {
+        // edge case
+        if(nums.length == 0 || nums == null)
+            return -1;
+        
+        //edge case1 : 
+        if(nums.length == 1)
+            return nums[0];
+        
+        //edge case 2: if array is not rotated
+        if(nums[0] < nums[nums.length -1])
+            return nums[0];
+        
+        int low  = 0;
+        int high = nums.length -1;
+        
+        // Binary Search
+        while(low<high){
+            // find mid element
+            int mid = low+(high - low)/2;
+            
+            // if mid element is greater than mid+1, then mid+1 is the smallest element
+            if(nums[mid] > nums[mid+1])
+                return nums[mid+1];
+            
+            
+            if(nums[mid-1]> nums[mid])
+                return nums[mid];
+            
+            // if nums[low] id less than nums[mid] then it means that smallest value is in right half after mid
+            if(nums[low] < nums[mid])
+                low = mid + 1;
+            else
+                high = mid -1;
+                 
+        }
+        
+        // basic return
+        return -1;
+    }
+}
