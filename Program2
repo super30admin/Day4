@@ -1,0 +1,22 @@
+// Time Complexity : O(log(n))
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+class Solution {
+    public int findMin(int[] nums) {
+        int first=0;
+        int low=0;
+        int high=nums.length-1;
+        if(nums[low]<nums[high]) return nums[low];
+        if(nums.length==1) return nums[0];
+        while(low<= high){
+            int mid=low+(high-low)/2;
+            if(nums[mid]>nums[mid+1]) return nums[mid+1];
+             if(nums[mid-1]>nums[mid]) return nums[mid];
+            if(nums[mid]>nums[first]) low=mid+1;
+            else if(nums[mid]<nums[first]) high=mid-1;
+        }
+        return -1;
+        }
+        }
