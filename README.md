@@ -18,7 +18,20 @@ Example 2:
 
 Input: nums = [5,7,7,8,8,10], target = 6
 Output: [-1,-1]
-
+# The Time complexity is O(log n)
+# The Space complexity is O(1)
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        s=0
+        e=len(nums)-1
+        while s<=e:
+            if s==e:
+                return s
+            m=(s+e)//2
+            if nums[m]>nums[m+1]:
+                e=m
+            else:
+                s=m+1
 ## Problem 2: (https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
 
 Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
@@ -36,6 +49,18 @@ Output: 1
 Example 2:
 Input: [4,5,6,7,0,1,2]
 Output: 0
+# The Time complexity is O(log n)
+# The Space complexity is O(1)
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left, right = 0, len(nums) - 1
+        while nums[left] > nums[right]:
+            middle  = (left + right) // 2
+            if nums[middle] < nums[right]:
+                right = middle
+            else:
+                left = middle + 1
+        return nums[left]
 
 ## Problem 3: (https://leetcode.com/problems/find-peak-element/)
 A peak element is an element that is greater than its neighbors.
@@ -61,5 +86,33 @@ Explanation: Your function can return either index number 1 where the peak eleme
 Note:
 
 Your solution should be in logarithmic complexity.
-
-
+# The Time complexity is O(log n)
+# The Space complexity is O(1)
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        l = self.fb(nums, target, True)
+        if (l == -1):
+            return [-1, -1]
+        u = self.fb(nums, target, False)
+        
+        return [l, u]
+        
+    def fb(self, nums: List[int], target: int, a: bool) -> int:
+        N = len(nums)
+        begin, end = 0, N - 1
+        while begin <= end:
+            mid = (begin + end) // 2  
+            if nums[mid] == target:
+                if a:
+                    if mid == begin or nums[mid - 1] < target:
+                        return mid
+                    end = mid - 1
+                else:
+                    if mid == end or nums[mid + 1] > target:
+                        return mid
+                    begin = mid + 1
+            elif nums[mid] > target:
+                end = mid - 1
+            else:
+                begin = mid + 1
+        return -1
