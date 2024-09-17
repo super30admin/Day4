@@ -1,0 +1,16 @@
+class Solution:
+    
+    def findPeakElement(self, nums: List[int]) -> int:
+        self.n=len(nums)
+        self.low=0
+        self.high=self.n-1
+        
+        while (self.low<=self.high):
+            mid=self.low+(self.high-self.low)//2
+            if((mid==0 or nums[mid-1]<nums[mid]) and (mid==self.n-1 or nums[mid+1]< nums[mid])):
+                return mid
+            elif (mid>0 and nums[mid]<nums[mid-1]):
+                self.high=mid-1
+            else: 
+                self.low=mid+1
+        return -1
