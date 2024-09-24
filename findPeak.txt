@@ -1,0 +1,25 @@
+problem 3: https://leetcode.com/problems/find-peak-element/
+//check neighbouring elements, if both are less then return that peak
+//else move towards higher element as we are garuanteed to find a peak
+//edge case is left most and right most element
+class Solution {
+    public int findPeakElement(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int l = 0, h = nums.length-1;
+
+        while (l <= h) {
+            int mid = l + (h - l) / 2;
+            if ((mid == 0 || nums[mid-1] < nums[mid]) && (mid == nums.length - 1 || nums[mid+1] < nums[mid])) {
+                return mid;
+            } else if (nums[mid + 1] > nums[mid]) {
+                l = mid + 1;
+            } else {
+                h = mid - 1;
+            }
+        }
+        return -1;
+    }
+}
