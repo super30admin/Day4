@@ -19,6 +19,84 @@ Example 2:
 Input: nums = [5,7,7,8,8,10], target = 6
 Output: [-1,-1]
 
+// Time Complexity : O(log N)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : at first, found it difficult to handle duplicates in the condition checks  
+
+
+// Your code here along with comments explaining your approach
+
+class Solution {
+    
+    private int binarySearch1(int target, int arr[], int low, int high)
+    {
+        while(low <= high)
+        {
+            int mid = low + (high-low)/2;
+            if((arr[mid] == target && mid-1 >=0 && arr[mid-1] != target) || (arr[mid] == target && mid -1 < 0) )
+            {
+                return mid;
+            }
+            else if(arr[mid] < target)
+            {
+                low = mid+1;
+            }
+            else
+            {
+                high = mid-1;
+            }
+        }
+        
+        return -1;
+    }
+    
+    private int binarySearch2(int target, int arr[], int low, int high)
+    {
+        while(low <= high)
+        {
+            int mid = low + (high-low)/2;
+            if((arr[mid] == target && (mid+1 <arr.length && arr[mid+1] != target)) || (arr[mid] == target && (mid + 1) >= arr.length))
+            {
+                return mid;
+            }
+            else if(arr[mid] <= target)
+            {
+                low = mid+1;
+            }
+            else
+            {
+                high = mid-1;
+            }
+        }
+        
+        return -1;
+    }
+    public int[] searchRange(int[] nums, int target) {
+        
+        /*int discoveryIndex = binarySearch(target, nums, 0, nums.length -1);
+        if (discoveryIndex == -1) return new int[] {-1,-1};
+        // int i=discoveryIndex, j= discoveryIndex;
+        // ----Linear search on left side and right side-------
+        *while(i>=1 && nums[i-1]== nums[discoveryIndex] )
+        {
+            i--;
+        }
+        while(j< (nums.length-1) && nums[j+1]== nums[discoveryIndex])
+        {
+            j++;
+        }
+        
+        return new int[]{i, j};
+        */
+        int firstOccurence = binarySearch1(target, nums, 0, nums.length -1);
+        int lastOccurence = binarySearch2(target, nums, 0, nums.length -1);
+        
+        return new int[]{firstOccurence, lastOccurence};
+    
+    }
+}
+
 ## Problem 2: (https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
 
 Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
