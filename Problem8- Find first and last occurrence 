@@ -1,0 +1,100 @@
+// Time Complexity : O(logn)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : Coudn't think of 2 binary search pass
+
+
+// Your code here along with comments explaining your approach
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function(nums, target) {
+   // Brute force Approach
+//     if(nums.length==0 || nums==null) return [-1,-1];
+    
+//     var res=[];
+    
+//     for(let i=0;i <nums.length;i++){
+//         if(nums[i]==target){
+//           res.push(i);
+            
+//             while(nums[i]<target){
+//                 res.push(i);
+                
+//                 i++;
+             
+//             }
+          
+        
+              
+//         }
+   
+    
+//     }
+    
+    
+//     return res;
+    
+    
+    
+/// Using Binary Search
+    if(nums.length==0 || nums==null) return [-1,-1];
+    
+   var first= findLimit(nums,target,true)
+   if (first===-1){
+       return [-1,-1]
+   }
+  var last=findLimit(nums,target,false)
+    
+    
+    return [first,last];
+    
+    
+
+};
+
+
+function findLimit(arr, target, isFirst){
+   var start=0, end = arr.length-1;
+    
+    while(start<=end){
+        var mid= Math.floor((start+end)/2);
+        
+        if(arr[mid]===target){
+            
+            if(isFirst){
+                
+                    
+                    if (mid == start || arr[mid - 1] != target) {
+                        return mid;
+                    }
+                    
+                   
+                    end = mid - 1;
+                
+                
+                
+            }else{
+          
+                    if (mid == end || arr[mid + 1] != target) {
+                        return mid;
+                    }
+                    
+            
+                    start = mid + 1; 
+            }
+            
+            
+            
+        }
+        else if(arr[mid]>target){
+            end=mid-1;
+        }
+        else{
+            start=mid+1;
+        }
+    }
+    return -1; 
+}
