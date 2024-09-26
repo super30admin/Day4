@@ -1,0 +1,44 @@
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        first=self.start(nums,target, 0, len(nums)-1)
+        end=self.end(nums,target, 0, len(nums)-1)
+        return [first,end]
+        
+    def start(self, nums, target, low, high):
+        # low=0
+        # high=len(nums)-1
+        
+        while(low<=high):
+            mid=low+(high-low)/2
+            if(nums[mid]==target):
+                if(mid==low or nums[mid-1]<nums[mid]):
+                    return mid
+                else:
+                    high=mid-1
+            elif(nums[mid]>target):
+                high=mid-1
+            else:
+                low=mid+1
+        return -1
+    
+    def end(self, nums, target, low, high):
+        # low=0
+        # high=len(nums)-1
+        
+        while(low<=high):
+            mid=low+(high-low)/2
+            if(nums[mid]==target):
+                if(mid==high or nums[mid]<nums[mid+1]):
+                    return mid
+                else:
+                    low=mid+1
+            elif(nums[mid]>target):
+                high=mid-1
+            else:
+                low=mid+1
+        return -1
