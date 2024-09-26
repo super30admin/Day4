@@ -1,0 +1,19 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        self.low=0
+        self.high=len(nums)-1
+        
+        while (self.low<=self.high): ####  First find the mid value
+            mid=self.low+ (self.high - self.low)//2
+            if ((mid==0 or nums[mid+1]>nums[mid]) and (mid ==len(nums) or nums[mid-1]>nums[mid])): ### Checking if the mid value is the target where adjacent values should be always greater
+                return nums[mid]
+            if nums[mid]<nums[self.high]: ### Deciding which side to move to get the minimum. If you visualize , one side of the array would always be sorted when it is rotated.So you cannot find 
+            #the minumim there. Hence move in the opposite direction
+                self.high=mid-1
+            else:
+                self.low=mid+1
+        return -1
+        
+        
+       #### Time complexity - logn because we dive the array by half and traverse.
+       #### Space complexity - constant O(1) ### Since elements are constant
