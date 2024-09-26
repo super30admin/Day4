@@ -1,0 +1,36 @@
+// Time complexity: O(logn)
+// Space complexity: O(1)
+// Did this code successfully run on leetcode: Yes
+
+class Solution {
+    public int findMin(int[] nums) {
+
+        if(nums == null || nums.length == 0) return -1;
+
+        if(nums.length == 1) return nums[0];
+
+        int low = 0;
+        int high = nums.length - 1;
+
+        while(low <= high){
+            int mid = low + (high - low)/2;
+
+            // if the mid is less than its previous element, return that element
+            if(mid > 0 && nums[mid] < nums[mid-1] ){
+                return nums[mid];
+            }
+            // if the left half is sorted and the right half is unsorted, go right
+            else if(nums[low] <= nums[mid] && nums[mid] > nums[high]){
+                low = mid + 1;
+            }
+            // go left
+            else {
+                high = mid -1;
+            }
+
+        }
+
+        // return the minimum element.
+        return nums[low];
+    }
+}
