@@ -1,0 +1,66 @@
+// Time Complexity : O(logN)
+// Space Complexity : O(1)
+// Did this code successfully run in leetcode : Yes
+// Any problems faced : No
+//Approach
+/*
+used binary search for logN time complexity. 
+For every value, if it is less than target, move low to mid + 1 and if it is greater than target, move high to mid - 1
+if mid value is the targat value, check if the value present in mid - 1 is same as the target, if so continue binary search to the left part of it until mid - 1 value is not equal to target, to get the first occurance. 
+Continue the same for last occurance
+*/
+
+class Solution {
+public:
+    
+    int firstOccurance(vector<int> &v, int target) {
+        int low = 0;
+        int high = v.size() - 1;
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
+            if(v[mid] == target) {
+                if(mid == low || v[mid - 1] != target) {
+                    return mid;
+                }
+                high = mid - 1;
+            }
+            else if(v[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+    
+    int lastOccurance(vector<int> &v, int target) {
+        int low = 0;
+        int high = v.size() - 1;
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
+            if(v[mid] == target) {
+                if(mid == high || v[mid + 1] != target) {
+                    return mid;
+                }
+                low = mid + 1;
+            }
+            else if(v[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+    
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> v(2);
+        v[0] = firstOccurance(nums, target);
+        if(v[0] == -1) {
+            v[1] = -1;
+            return v;
+        }
+        v[1] = lastOccurance(nums, target);
+        return v;
+    }
+};
