@@ -1,0 +1,22 @@
+class Solution 
+{
+    public int[] searchRange(int[] nums, int target) 
+    {
+        int l = 0, r = nums.length-1;
+        while(l<=r)
+        {
+            if(nums[l] == target && nums[r] == target)
+                return new int[] {l, r};
+            else if(nums[l] == target)
+                r--;
+            else if(nums[r] == target)
+                l++;
+            else
+            {
+                l++;
+                r--;
+            }
+        }
+        return new int[] {-1, -1};
+    }
+}
