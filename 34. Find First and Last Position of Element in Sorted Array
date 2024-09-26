@@ -1,0 +1,46 @@
+Time Complexity:O(log n)
+Space complexity:O(1)
+Did this code successfully submitted on leetcode: Yes
+
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        
+        int[] res = new int[2];
+        if(nums==null || nums.length==0)
+            return res;
+        
+        res[0]=findFirstElement(nums,target);
+        res[1]=findLastElement(nums,target);
+        return res;
+    }
+    
+    public int findFirstElement(int[] nums,int target){
+       int l=0,h=nums.length-1;
+        
+        while(l<=r){
+            int mid = l+(h-l)/2;
+            
+            if(nums[mid]>=target)
+                h=mid-1;
+            else if(nums[mid]<target)
+                l=mid+1;    
+        }
+        return l;
+    }
+    
+    public int findLastElement(int[] nums,int target){
+        int l=0,h=nums.length-1;
+        
+        while(l<=r){
+            int mid = l+(h-l)/2;
+            
+            if(nums[mid]<=target)
+                l=mid+1;
+            else if(nums[mid]>target)
+                h=mid-1;    
+        }
+        return h;
+    }
+    
+}
