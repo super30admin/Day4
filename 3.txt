@@ -1,0 +1,37 @@
+// Time Complexity : O(log n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : None
+
+
+// Your code here along with comments explaining your approach
+
+approach: if the mid element is not a peak, we go right if the right element is greater than the mid element, and we go left if the
+left element is greater than the mid element. If both are greater then it doesn't really matter which direction we are going in.
+We also have to handle the cases of the first and last elements of the array separately.
+
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        if not nums: return None
+        if len(nums) == 1: return 0
+
+        l, r = 0, len(nums) - 1
+
+        while l <= r:
+            mid = l + (r - l) // 2
+
+            if mid == 0 and nums[mid] > nums[mid + 1]:
+                return mid
+
+            if mid == len(nums) - 1 and nums[mid] > nums[mid - 1]:
+                return mid
+
+            if nums[mid - 1] < nums[mid] > nums[mid + 1]:
+                return mid
+
+            elif nums[mid] < nums[mid + 1]:
+                l = mid + 1
+            elif nums[mid] < nums[mid - 1]:
+                r = mid - 1
+
+        return None
