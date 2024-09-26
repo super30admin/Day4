@@ -1,3 +1,8 @@
+//learning golang
+
+// time complexity: O(log n)
+// space complexity: O(1)
+
 package main
 
 func findMin(nums []int) int {

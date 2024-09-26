@@ -1,3 +1,6 @@
+#time complexity: O(logn)
+#space complexity: O(1)
+
 class Solution:
     def findMin(self, nums: List[int]) -> int:
         low, high = 0, len(nums)-1
