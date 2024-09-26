@@ -1,0 +1,23 @@
+def searchRange(self, nums, target):
+    def search(nums, target, flag):
+        low = 0
+        high = len(nums)
+
+        while low < high:
+            mid = (low + high) // 2
+            if target < nums[mid] or (flag and nums[mid] == target):
+                high = mid
+            else:
+
+                low = mid + 1
+        return low
+
+
+    if target in nums:
+        left = search(nums, target, True)
+        right = search(nums, target, False) - 1
+        return [left, right]
+    else:
+        return [-1, -1]
+#time complexity - O(logn)
+#space complexity- O(1)

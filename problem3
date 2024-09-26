@@ -1,0 +1,12 @@
+def findPeakElement(self, nums: List[int]) -> int:
+        if len(nums)==1:
+              return 0
+        i=0
+        while i>=0 and i<(len(nums)-1):
+            if nums[i]>nums[i+1] and nums[i]>nums[i-1]:
+                return i
+            i+=1
+        return i
+# time complexity- O(n)
+# space complexity- O(1)
+#couldn't figure out for binary search
