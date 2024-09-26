@@ -1,0 +1,73 @@
+//Time Complexity O(Log n)
+//LeetCode tested
+
+public class SearchRange {
+    public static void main(String[] args) {
+        int[] ans = searchRange(new int[]{7,7,7,8,8,10},7);
+        System.out.println(ans[0]+" "+ans[1]);
+    }
+    public static int[] searchRange(int[] nums, int target) {
+        int searchdedIndex = binSearch(nums,target,0, nums.length-1);
+        if(searchdedIndex == -1)
+            return new int[]{-1,-1};
+        else{
+            int[] result = new int[2];
+            if(searchdedIndex == nums.length-1 || nums[searchdedIndex+1] != target){
+                result[1]=searchdedIndex;
+            }else{
+                int left = searchdedIndex+1;
+                int right = nums.length-1;
+                while (left<=right){
+                    int mid=left+((right-left)/2);
+                    if(nums[mid] == target && ((mid+1) == nums.length || nums[mid+1]!=target)){
+                        result[1] = mid;
+                        break;
+                    }else{
+                        if(nums[mid] == target)
+                            left = mid+1;
+                        else
+                            right = mid-1;
+                    }
+                }
+            }
+            //left side
+            System.out.println(searchdedIndex+" "+nums[searchdedIndex-1]);
+            if(searchdedIndex-1 == -1 || nums[searchdedIndex-1] != target){
+                result[0]=searchdedIndex;
+            }else{
+                int left = 0;
+                int right = searchdedIndex-1;
+                //System.out.println(left+" left right value "+right);
+                while (left<=right){
+                    int mid=left+((right-left)/2);
+                    //System.out.println(left+" left right value "+right+" mid "+mid);
+                    if(nums[mid] == target && ((mid-1) == -1 || nums[mid-1]!=target)){
+                        result[0] = mid;
+                        break;
+                    }else{
+                        if(nums[mid] == target)
+                            right = mid-1;
+                        else
+                            left = mid+1;
+                    }
+                }
+            }
+            return result;
+        }
+    }
+    public static int binSearch(int[] nums,int target,int l, int u){
+        if(u>=l){
+            int mid=l+((u-l)/2);
+            if(nums[mid]==target){
+                return mid;
+            }
+            if(nums[mid]>target){
+                return binSearch(nums,target,l,mid-1);
+            }
+            if(nums[mid]<target){
+                return binSearch(nums,target,mid+1,u);
+            }
+        }
+        return -1;
+    }
+}

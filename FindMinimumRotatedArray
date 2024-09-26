@@ -1,0 +1,22 @@
+//Time Complexity O(Log n)
+//LeetCode tested
+
+public class FindMinimumInRotatedArray {
+    public static void main(String[] args) {
+        System.out.println(findMin(new int[]{6,7,1,2,3,4,5}));
+    }
+    public static int findMin(int[] nums) {
+        if(nums == null || nums.length == 0) return -1;
+
+        int left = 0;
+        int right = nums.length-1;
+        while (left<right){
+            int mid = left + (right-left)/2;
+            if(nums[mid] > nums[right])
+                left=mid+1;
+            else
+                right = mid;
+        }
+        return nums[left];
+    }
+}
