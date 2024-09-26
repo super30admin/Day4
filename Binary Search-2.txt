@@ -1,0 +1,138 @@
+Problem 1:find-first-and-last-position-of-element-in-sorted-array
+// Time Complexity : O(n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes 
+
+// Your code here along with comments explaining your approach
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+       
+        int low = 0;
+        int high = nums.length-1;
+        int first = -1;
+        int last = -1;
+        int [] ans = new int[2];
+        // Binary search to find the element
+        while(low<=high)
+        {
+            int mid = low + (high-low)/2;
+            if(target==nums[mid])
+            {
+                first = mid;
+                last = mid;
+                break;
+            }else if(target<nums[mid])
+            {
+                high = mid-1;
+            }else{
+               low = mid+1;   
+            }
+        }
+        
+        if(first==-1 && last==-1)
+        {
+            ans[0] = first;
+            ans[1] = last;
+            return ans;
+        }
+        
+        //find last occurence
+        while(last+1<nums.length && nums[last]==nums[last+1])
+        {
+            last++;
+        }
+        
+        //find first occurrence;
+        while(first-1>-1 && nums[first]==nums[first-1])
+        {
+            first--;
+        }
+        
+        ans[0] = first;
+        ans[1] = last;
+        return ans;
+    }
+    
+}
+
+Problem-2:find-minimum-in-rotated-sorted-array
+// Time Complexity : O(log(n))
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes 
+
+class Solution {
+    public int findMin(int[] nums) {
+        
+      if(nums.length==1)
+      {
+          return nums[0];
+      }
+        
+     int low=0;
+     int high = nums.length-1;
+    
+        
+        if(nums[high]>nums[low])
+        {
+            return nums[low];
+        }
+        
+        while(low<=high)
+        {
+            int mid = low + (high-low)/2;
+            
+            if(nums[mid]>nums[mid+1]) pivot is at mid
+            {
+                return nums[mid+1];
+            }
+            
+            if(nums[mid-1]>nums[mid]) pivot is at mid-1
+            {
+                return nums[mid];
+            }
+            
+            if(nums[mid]>nums[low]) // Check for the pivot on the left
+            {
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+            
+        }
+        
+        return -1;
+    }
+}
+
+
+Problem 3:find-peak-element
+// Time Complexity : O(log(n))
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes 
+class Solution {
+    public int findPeakElement(int[] nums) {
+     
+        if(nums.length==1)
+        {
+            return 0;
+        }
+        int low = 0;
+        int high = nums.length-1;
+        
+        while(low<=high)
+        {
+            
+            int mid = low + (high-low)/2;
+            if(mid+1<nums.length && mid-1>-1 && nums[mid]>nums[mid+1] && nums[mid]>nums[mid-1]) // checking for peak 
+            {
+                return mid;
+            }else if(mid+1<nums.length && nums[mid]<nums[mid+1]) //Checking for the rising side.
+            {
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        return low;
+    }
+}
