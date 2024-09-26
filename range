@@ -1,0 +1,51 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int a[] = new int[2];
+        a[0]=left(nums,target);
+        a[1]=right(nums,target);
+        return a;
+    }
+    
+    //left range
+    private int left(int nums[], int target){
+        int index=-1;
+        int low=0;int high=nums.length-1;
+        while(low<=high){
+        int mid =low + (high-low)/2;
+
+            if(nums[mid]>=target){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+            if(nums[mid]==target){
+            index= mid;
+            }
+        }
+        return index;
+    }
+   // right range
+    private int right(int nums[],int target){
+        int index=-1;
+        int low=0,high=nums.length-1;
+        while(low<=high){
+        int mid =low + (high-low)/2;
+
+            if(nums[mid]<=target){
+            low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+            if(nums[mid]==target){
+            index=mid;
+            }
+        }
+        return index;
+        
+    }
+}
+
+//T : O(logn)
+//s: O(1)
