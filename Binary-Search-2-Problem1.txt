@@ -1,0 +1,58 @@
+#Binary Search - 2 
+#Problem-1
+
+##TimeComplexity: o(n)
+##Space Complexity : o(logn)
+
+
+class Solution {
+      
+         static int leftIndex  = -1;
+         static int rightIndex = -1;
+    
+    public static void binarySearch(int[] nums,int low,int high,int target,int[] res)
+    {
+        if(low<=high){
+        int  mid = low+(high-low)/2;
+        if(nums[mid]==target)
+        {
+            if((mid==0||(nums[mid-1]<nums[mid])))
+                    res[0] = mid;
+            if((mid==(nums.length-1)||nums[mid]<nums[mid+1]))
+                    res[1] = mid;
+            if(mid>0 && nums[mid-1]==nums[mid])
+            { 
+                  int x = mid-1;
+                 while(x>=0 && nums[x]==nums[mid])
+                     x = x-1;
+                 res[0] = x+1;
+            }
+            if((mid < nums.length-1) && nums[mid]==nums[mid+1])
+            {
+                  int x = mid+1;
+                 while((x<=(nums.length-1)) && nums[x]==nums[mid])
+                     x = x+1;
+                 res[1] = x-1;
+            }
+        }
+        else if(nums[mid]<target)
+              binarySearch(nums,mid+1,high,target,res);
+        else
+              binarySearch(nums,low,mid-1,target,res);
+        }
+        
+    }
+    
+    
+    
+    
+    public int[] searchRange(int[] nums, int target)
+    {
+      int res[] = {-1,-1};
+      binarySearch(nums,0,nums.length-1,target,res);
+      
+      return res;  
+        
+    }
+    
+}
