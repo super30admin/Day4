@@ -1,0 +1,33 @@
+//this code didnt run in leetcode.
+/* it gives the following message
+java.lang.ArrayIndexOutOfBoundsException: Index -2 out of bounds for length 5
+  at line 16, Solution.findMin
+  at line 54, __DriverSolution__.__helper__
+  at line 84, __Driver__.main*/
+
+class Solution {
+    public int findMin(int[] nums) {
+        if(nums.length==1) return nums[0];
+        
+        int n=nums.length;
+        int low=0;
+        int high=n-1;
+        
+        
+        while(low<=high)
+        {
+            if(nums[low]<=nums[high])
+            return nums[low];
+        
+           int mid=low-(high-low)/2;
+            if((mid==low || nums[mid]<nums[mid-1]) && (mid==high || nums[mid]<nums[mid+1]))
+                return nums[mid];
+            else if(nums[low]<=nums[mid])
+               low=mid+1;
+               else
+               high=mid-1;
+        }
+        return 12;
+        
+    }
+}
