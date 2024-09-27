@@ -1,0 +1,2 @@
+
+    print(obj.findMin(a)) 
