@@ -1,0 +1,79 @@
+Time Complexity- O(log n)
+Space Complexity- O(1)
+All test cases passed
+Find First and Last Position of Element in Sorted Array
+class Solution: 
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if len(nums)==0:
+            return [-1,-1]
+        low=0
+        l=[]
+        high=len(nums)-1
+        while low<=high:
+            mid=(low+high)//2
+            if target==nums[mid]:
+                if mid==0 or nums[mid-1]!=nums[mid]:
+                    l.append(mid)
+                    break
+                else:
+                    high=mid-1
+            else:
+                if nums[mid]<target:
+                    low=mid+1
+                else:
+                    high=mid-1
+        if len(l)!=1:
+            return [-1,-1]
+        low=0
+        high=len(nums)-1
+        while low<=high:
+            mid=(low+high)//2
+            if target==nums[mid]:
+                if mid==(len(nums)-1) or nums[mid]!=nums[mid+1]:
+                    l.append(mid)
+                    break
+                else:
+                    low=mid+1
+            else:
+                if nums[mid]<target:
+                    low=mid+1
+                else:
+                    high=mid-1
+        return l
+Find Minimum in Rotated Sorted Array
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        low=0
+        high=len(nums)-1
+        while low<=high:
+            if nums[low]<=nums[high]:
+                return nums[low]
+            mid=(low+high)//2
+            if (mid==0 and nums[mid]<nums[mid+1]) or (mid==(len(nums)-1) and nums[mid<nums[mid-1]]):
+                return nums[mid]
+            if nums[mid]<nums[mid-1] and nums[mid]<nums[mid+1]:
+                return nums[mid]
+            if nums[low]<=nums[mid]:
+                low=mid+1
+            else:
+                high=mid-1
+Find Peak Element
+
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        low=0
+        high=len(nums)-1
+        if len(nums)==1:
+            return 0
+        while low<=high:
+            mid= (low+high)//2
+            if (mid==0 and nums[mid]>nums[mid+1]) or (mid==len(nums)-1 and nums[mid]>nums[mid-1]):
+                return mid
+            
+            if nums[mid]>nums[mid-1] and nums[mid]>nums[mid+1]:
+                return mid
+            elif nums[mid+1]>nums[mid]:
+                low=mid+1
+            else:
+                high=mid-1
