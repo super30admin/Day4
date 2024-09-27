@@ -1,0 +1,62 @@
+34. Find First and Last Position of Element in Sorted Array
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if nums==None or len(nums)==0:
+            return [-1,-1]
+        if target > nums[len(nums)-1] or target <nums[0]:
+            return [-1,-1]
+        l=0
+        hi=len(nums)-1
+        ls=[]
+        while(l<=hi):
+            mid=l+(hi-l)//2
+            if (target==nums[mid]):
+                if mid==0 or nums[mid]>nums[mid-1]:
+                    ls.append(mid)
+                    break
+                hi=mid-1
+            elif(target<nums[mid]):
+                hi=mid-1
+            else:
+                l=mid+1
+        if ls==None or len(ls)==0:
+            return [-1,-1]
+        else:
+            l=ls[0]-1
+            h=len(nums)-1
+            while(l<=h):
+            
+                mid=l+(h-l)//2
+                if(target==nums[mid]):
+                
+                    if mid==h or nums[mid]<nums[mid+1]:
+                        ls.append(mid)
+                        break
+                    l=mid+1
+                elif (target<nums[mid]):
+                    h=mid-1
+                else:
+                    l=mid+1
+            return ls
+
+
+153. Find Minimum in Rotated Sorted Array
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        l=0
+        h=len(nums)-1
+        while(l<=h):
+            if(nums[l]<=nums[h]):
+                return nums[l]
+            mid=l+(h-l)//2
+            if (nums[mid]<nums[mid+1] or mid==h) and (nums[mid]<nums[mid-1] or mid==l):
+                    return nums[mid]
+                    break
+            if(nums[l]<=nums[mid]):
+                l=mid+1
+            else:
+                h=mid+1
+        
+        
