@@ -1,0 +1,23 @@
+// Time Complexity :O(log n)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :Yes
+
+
+
+class Solution {
+    func search(_ nums: [Int], _ target: Int) -> [Int] {
+        var high = nums.count-1, low = 0, mid = (high+low)/2
+        while(low<=high){
+            mid = (high+low)/2
+            if(nums[mid] == target){
+                var left = -1, right = 1
+                while((mid+left) >= 0 && nums[mid+left] == nums[mid]){left-=1}
+                while((mid + right) <= nums.count - 1 && nums[mid+right] == nums[mid]){right+=1}
+                return [mid+left + 1, mid+right - 1]
+            }
+            else if(nums[mid] > target){high = mid - 1}
+            else if(nums[mid] < target){low = mid + 1}
+        }
+        return [-1,-1]
+    }
+}

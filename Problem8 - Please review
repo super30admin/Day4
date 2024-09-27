@@ -1,0 +1,26 @@
+// Time Complexity :Same as Binary Search O(log N)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :Yes
+
+class Solution {
+    func findMin(_ nums: [Int]) -> Int {
+        if nums.count == 0 {
+            return 0
+        }
+        
+        var left = 0
+        var right = nums.count - 1
+        var middle = 0
+        
+        while left < right {
+            middle = (left + right) / 2
+            if nums[middle] > nums[right] {
+                left = middle + 1
+            } else {
+                right = middle
+            }
+        }
+        
+        return nums[left]
+    }
+}
