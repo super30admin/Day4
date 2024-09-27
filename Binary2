@@ -1,0 +1,41 @@
+// Time Complexity :O(logn)
+// Space Complexity :
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : thinking the edge case for last element and front element
+
+
+// Your code here along with comments explaining your approach
+//Peek Element 
+
+class Solution {
+//initally we need to find the mid of the element 
+    public int findPeakElement(int[] a) {
+        int low =0;
+        int high =a.length-1;
+        int mid =-1;
+        while(low<=high){
+        //initally we need to find the mid of the element 
+            mid=(high+low)/2;
+            //we check the condition for the first and last element as well as for the each mid element that it should peek element
+            if ((mid==0||a[mid-1]<=a[mid]) && (mid==a.length-1 || a[mid+1]<=a[mid]))
+                return mid;
+                // to chk the second element form the right 
+                if(mid>0 && a[mid-1]>=a[mid])
+                   
+                   high=mid-1;
+                else
+                    low=mid+1;
+        }
+         return -1;
+    }
+                  
+}
+
+// Time Complexity :O(logn)
+// Space Complexity :
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : thinking the edge case for last element and front element
+
+
+// Your code here along with comments explaining your approach
+                   
