@@ -1,0 +1,49 @@
+// Time Complexity  - O(log n)
+// Space Complexity - 0(1) - Constant space
+// Did this code successfully run on Leetcode : Yes successfully ran
+// Any problem you faced while coding this : No
+
+/* Your code here along with comments explaining your approach
+
+In this problem, the minimum element will always be in the unsorted side.
+To get the unsorted side, check nums[mid] > nums[high], then bring low pointer 
+to mid +1. This means unsorted side is in right
+
+Otherwise move the high pointer to mid. This means left side is unsorted.
+
+When low pointer and high becomes equal or greater, the loop breaks,
+and the min element is in the low index.
+*/	
+
+
+
+public class MinElementrotatedSortedArray {
+	 public int findMin(int[] nums) {
+		 
+		 int low = 0, high = nums.length-1;
+		 
+		 while(low < high) {
+			 int mid = low + (high-low)/2;
+			 
+			 if(nums[mid] > nums[high] ) {
+				 low = mid+1;
+			 }else {
+				 high = mid;
+			 }
+		 
+		 }
+ 
+		 return nums[low];
+	 }
+	 
+	public static void main(String[] args) {
+		int[] nums = { 3,4,5,6,7,8,2};
+
+		MinElementrotatedSortedArray m = new MinElementrotatedSortedArray();
+		int min = m.findMin(nums);
+
+		System.out.println(min);
+
+	}
+
+}
