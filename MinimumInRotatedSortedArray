@@ -1,0 +1,47 @@
+// Time Complexity : O(logn)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+
+class Solution {
+    public int findMin(int[] nums) {
+        int n = nums.length;
+        
+        if(n == 1){
+            return nums[0];
+        }
+        //If the array is already sorted
+        if(nums[0] <= nums[n - 1]){
+            return nums[0];
+        }
+        
+        int low = 0;
+        int high = n - 1;
+        
+        while(low <= high){
+            // Sometimes both parts are sorted. Then we shouldn't skip the min
+            if(nums[low] <= nums[high]){
+                return nums[low];
+            }
+            
+            int mid = low + (high - low) / 2;
+            
+            if((mid == 0 || nums[mid] < nums[mid - 1]) && (mid == n - 1 || nums[mid] < nums[mid + 1])){
+                return nums[mid];
+            }
+            else if(nums[low] <= nums[mid]){
+                //Left is sorted. So discard it.
+                //Because the min element will be in the unsorted part.
+
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+}

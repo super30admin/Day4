@@ -1,0 +1,79 @@
+// Time Complexity : O(logn)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        if(nums == null || nums.length == 0){
+            return new int[] {-1, -1};
+        }
+        
+        int low = 0;
+        int high = nums.length - 1;
+        
+        int firstPos = binarySearchFirst(nums, target);
+        
+        // If first occurrence is not found, then element doesn't exist in the array
+        if(firstPos == -1){
+            return new int[] {-1, -1};
+        }
+        
+        int lastPos = binarySearchLast(nums, target);
+        
+        return new int[] {firstPos, lastPos};
+    }
+    
+    private int binarySearchFirst(int[] nums, int target){
+        int low = 0;
+        int high = nums.length - 1;
+        
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            
+            if(nums[mid] == target){
+                if(mid != 0 && nums[mid - 1] == nums[mid]){
+                    high = mid - 1;
+                }
+                else{
+                    return mid;
+                }
+            }
+            else if(nums[mid] < target){
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+    
+    private int binarySearchLast(int[] nums, int target){
+        int low = 0;
+        int high = nums.length - 1;
+        
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            
+            if(nums[mid] == target){
+                if(mid != nums.length - 1 && nums[mid + 1] == nums[mid]){
+                    low = mid + 1;
+                }
+                else{
+                    return mid;
+                }
+            }
+            else if(nums[mid] < target){
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+}
