@@ -1,0 +1,31 @@
+// find peak element in an array
+
+class Solution {
+    
+    // the logic is keep moving to the higher element side when doing
+    // binary side
+    // until u can't move any more
+    // low pointer should have the peak
+    // tested on leet code
+    // time complexity o(log n)
+
+    public int findPeakElement(int[] nums) {
+        
+        int low = 0;
+        int high = nums.length - 1;
+        int mid = 0;
+        
+        while (low < high) {
+            mid = low + (high - low)/2;
+            
+            if (nums[mid] < nums[mid+1]) {
+                    low = mid + 1;
+            } else {
+                    high = mid;
+            } 
+            
+        }
+        return low;
+        
+    }
+}
