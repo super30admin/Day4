@@ -1,0 +1,30 @@
+// Time Complexity :O(logn)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :Yeah! I was checking the conditions in a wrong way, but After Sai's lecture I was able to understand and code this successfully.
+
+
+// Your code here along with comments explaining your approach
+//Min Element
+class Solution {
+    public int findMin(int[] nums) {
+        int start =0, end=nums.length-1;
+        while(start<=end){
+            if(nums[start]<=nums[end]){
+                return nums[start];
+            }
+            int mid=start+(end-start)/2;
+            if(mid!=0&&nums[mid-1]>nums[mid]){
+                return nums[mid];
+            }
+            if(nums[mid]<nums[end])    //right sorted when pivot is left of mid 
+            {
+                end = mid-1;
+            }
+            else{                    //left sorted when pivot is right of mid
+                start = mid+1;         
+            }
+        }
+        return 5001;
+    }
+}
