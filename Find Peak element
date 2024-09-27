@@ -1,0 +1,40 @@
+//Time complexity: O(logn)
+//Space Complexity: O(1)
+//Code ran successfully 
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        if(nums.length == 1) return 0; // Edge case
+        int left = 0;
+        int right = nums.length - 1;
+        while(left <= right){
+            int mid = (left+right)/2;
+            //Case where the peak is the first element of the array
+            if(mid == 0){ // if the middle element is the first element and if it is greater than the next element
+                if(nums[0] > nums[1]){  
+                    return mid; 
+                }else{
+                    left = mid+1;
+                }
+            }
+            //Case where the peak is the last element of the array
+            if(mid == nums.length-1){ // if the middle element is the last element and if it is greater than the previous element
+                if(nums[mid] > nums[mid-1]){
+                    return mid;
+                }else{
+                    right = mid - 1;
+                }
+            }
+            // Normal case
+            if(nums[mid] > nums[mid+1] && nums[mid] > nums[mid- 1]){// If the middle element is the peak element  
+                return mid;
+            }
+            if(nums[mid] < nums[mid+1]){ // If the middle element is less than the next element
+                left = mid+1; // we move left
+            }else{
+                right = mid - 1;  // if the middle element is less than the previous element, move right
+            }
+        }
+        return -1;
+    }
+}

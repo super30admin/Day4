@@ -1,0 +1,42 @@
+//Time complexity: O(logn)
+//Space Complexity: O(1)
+//Program ran successfully
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int[] solution = new int[2];
+        solution[0] = leftMost(nums,target);  // calling a helper function to find the first occurence
+        solution[1] = rightMost(nums,target);   // calling a helper function to find the last occurence
+        return solution;
+    }
+    private int leftMost(int[] nums, int target){ 
+        int left = 0;
+        int right = nums.length - 1;
+        int index = -1;
+        while(left <= right){ // start the binary search
+            int mid = (left+right)/2;
+            if(nums[mid] == target) index = mid; // if element is found then record the index and keep looking on the left
+            if(target <= nums[mid]){
+                right = mid-1;
+            }else{
+                left = mid+1;
+            }
+        }
+        return index;
+    }
+    private int rightMost(int[] nums, int target){
+        int left = 0;
+        int right = nums.length - 1;
+        int index = -1;
+        while(left <= right){
+            int mid = (left+right)/2;
+            if(nums[mid] == target) index = mid; 
+            if(target >= nums[mid]){ // if element is found then record the index and keep looking on the right
+                left = mid+1;
+            }else{
+                right = mid-1;
+            }
+        }
+        return index;
+    }
+}

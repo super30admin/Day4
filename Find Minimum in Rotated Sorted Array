@@ -1,0 +1,28 @@
+//Time Complexity: O(logn)
+//Space Complexity: O(1)
+//Program ran successfully
+
+class Solution {
+    public int findMin(int[] nums) {
+        if(nums.length == 0) return 0; // checking edge cases
+        if(nums.length == 1) return nums[0];
+        int left = 0; 
+        int right = nums.length - 1;
+        while(left <= right){ // start binary search
+            int mid = (left+right)/2;  
+            if(mid != 0 && nums[mid] < nums[mid-1]){  // check if mid is not zero to avoid index out of bounds
+                return nums[mid];
+            }
+            if(mid == 0 && nums[mid] < nums[mid+1]){ // if array is already sorted
+                return nums[mid];
+            }
+            
+            if(nums[mid] > nums[right]){ // we are checking if the middle element lies in the right sorted array of the rotated array 
+                left = mid+1; // if not then we move the left pointer
+            }else{
+                right = mid - 1; // else we move the right pointer to mid - 1 
+            }
+        }
+        return -1;
+    }
+}
