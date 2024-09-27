@@ -1,0 +1,37 @@
+class Solution(object): # Time 97.05%; Time - O(logn); Space - O(1)
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        if nums == []:
+            return [-1, -1]
+        
+        return [self.bsLeft(nums, target, 0, len(nums)-1), self.bsRight(nums, target, 0, len(nums)-1)]
+        
+    def bsLeft(self, nums, target, start, end):
+        index = float("inf")
+        while start <= end:
+            mid = start + (end-start)//2
+            if nums[mid] > target:
+                end = mid - 1
+            elif nums[mid] < target:
+                start = mid + 1
+            else:
+                index = min(index, mid)
+                end = mid - 1
+        return index if index != float("inf") else -1
+    
+    def bsRight(self, nums, target, start, end):
+        index = -float("inf")
+        while start <= end:
+            mid = start + (end-start)//2
+            if nums[mid] > target:
+                end = mid - 1
+            elif nums[mid] < target:
+                start = mid + 1
+            else:
+                index = max(index, mid)
+                start = mid + 1
+        return index if index != -float("inf") else -1

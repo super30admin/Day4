@@ -1,0 +1,23 @@
+class Solution(object): # 98.21 % time; Time - O(logn); Space - O(1)
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        start = 0
+        end = len(nums) - 1
+        lowest = float("inf")
+        
+        while start <= end:
+            mid = (start + end) // 2 
+            if nums[start] <= nums[mid] and nums[mid] >= nums[end]: # first half sorted, second half not sorted
+                start = mid + 1
+            elif nums[start] <= nums[mid] and nums[mid] <= nums[end]: # first half sorted, second half sorted
+                end = mid - 1
+            elif nums[mid] <= nums[end]: # second half sorted, first part sorted/unsorted
+                end = mid - 1
+            else:
+                start = mid + 1
+            lowest = min(lowest, nums[mid])
+        
+        return lowest
