@@ -28,6 +28,6 @@ test("Scenario #1: [5,6,7,1,2,3,4]", () => {
 test("Scenario #2: [3, 1, 2]", () => {
   expect(findMin([3, 1, 2])).toStrictEqual(1);
 });
-test.only("Scenario #3: [1, 2, 3]", () => {
+test("Scenario #3: [1, 2, 3]", () => {
   expect(findMin([1, 2, 3])).toStrictEqual(123);
 });
