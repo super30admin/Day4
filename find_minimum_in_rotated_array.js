@@ -11,6 +11,7 @@ var findMin = function (nums) {
     let element = nums[mid];
     // If left half is sorted the move search range to right side
     // else left side.
+
     if (element < nums[right]) {
       // Move Left
       right = mid;
@@ -28,5 +29,5 @@ test("Scenario #2: [3, 1, 2]", () => {
   expect(findMin([3, 1, 2])).toStrictEqual(1);
 });
 test.only("Scenario #3: [1, 2, 3]", () => {
-  expect(findMin([1, 2, 3])).toStrictEqual(0);
+  expect(findMin([1, 2, 3])).toStrictEqual(123);
 });
