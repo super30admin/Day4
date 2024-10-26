@@ -39,8 +39,9 @@ var binarySearch = function (nums, left, right, target, direction) {
 
 test("Scenario #1: [5, 7, 7, 8, 8, 10]", () => {
   let result = searchRange([5, 7, 7, 8, 8, 10], 8);
-  expect(result).toBe([3, 4]);
+  let expected = [3, 4];
+  expect(result).toStrictEqual(expected);
 });
 test("Scenario #2: [3, 3, 3]", () => {
-  expect(findMin([3, 3, 3])).toBe([0, 2]);
+  expect(searchRange([3, 3, 3], 3)).toStrictEqual([0, 2]);
 });
