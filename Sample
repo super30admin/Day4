@@ -1,0 +1,127 @@
+// Time Complexity : O(log n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : YES
+// Any problem you faced while coding this : NO
+
+//Problem 9
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+
+          if( nums.length == 0) return new int[] {-1,-1};
+          int first = binarySearchFirst(nums,target,0,nums.length-1);
+            if(first == -1){
+                return new int[] {-1,-1};
+            }
+           int last = binarySearchLast(nums,target,first,nums.length-1);
+           return new int[] {first,last};
+           
+        
+    }
+
+    private int binarySearchFirst(int[] nums,int target,int low, int high){
+        while(low<=high){
+
+            int mid = low+(high-low)/2;
+           // System.out.println(mid);
+            if(target == nums[mid] && (mid == 0 || target != nums[mid-1])){
+                return mid;
+            } else if(target > nums[mid]){
+                    low = mid+1;
+            } else{
+                    high= mid-1;
+            }
+            
+        }
+        return -1;   
+    }
+
+    private int binarySearchLast(int[] nums,int target,int low, int high){
+        while(low<=high){
+
+            int mid = low+(high-low)/2;
+            if(target == nums[mid] && (mid == nums.length-1 || target != nums[mid+1])){
+                return mid;
+            } else if(target >= nums[mid]){
+                    low = mid+1;
+            } else{
+                    high= mid-1;
+            }
+            
+        
+        }  
+        return -1; 
+    }
+}
+
+
+
+
+
+
+
+
+// Time Complexity : O(log n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : YES
+// Any problem you faced while coding this : NO
+
+//Problem 10
+
+
+class Solution {
+    public int findMin(int[] nums) {
+
+            int low = 0, high = nums.length-1;
+            while(low<=high){
+
+             int mid = low+(high-low)/2;
+                if(nums[low]<=nums[high]){return nums[low];}
+             if((mid == 0 || nums[mid-1] > nums[mid]) && 
+        (mid == nums.length-1 || nums[mid+1] > nums[mid])){return nums[mid];}
+                else if(nums[mid]>=nums[low]){
+                    low=mid+1;
+                }
+                else {high = mid-1;}
+
+
+            }
+
+        
+        return -1;
+    }
+    
+}
+
+// Time Complexity : O(logn)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : YES
+// Any problem you faced while coding this : NO
+
+//Problem 11
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int low=0,high=nums.length-1;
+
+        while(low<=high){
+        int mid = low+(high-low)/2;
+        
+        
+            if((mid == 0 || nums[mid]>nums[mid-1]) && (mid == nums.length-1 ||nums[mid]>nums[mid+1])) { return mid;}
+            else if(mid>0 && nums[mid]<nums[mid-1]){
+                 high=mid-1;
+            }else {
+                low = mid+1;
+            }
+        
+        
+        }
+        return 34;
+    }
+}
+
+
+
+
+
