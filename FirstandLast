@@ -1,0 +1,61 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        
+        int len = nums.length;
+        //System.out.println(len);
+        
+        int l = leftbinary(0,len-1,nums,target);
+        int r = rightbinary(0,len-1,nums,target);            
+        
+        int[] arr = {l,r};
+        return arr;
+        
+    }
+    
+    public int leftbinary(int low,int high,int[] nums,int target){
+        
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            
+            if ((nums[mid] == target) && ((mid == low) || (nums[mid-1] < nums[mid]))){
+                return mid;    
+            }
+            
+            else if(nums[mid]<target){
+                low = mid + 1;
+            }
+            
+            else{
+                high = mid - 1;
+            }
+            
+        }
+        
+        return -1;
+    }
+    
+    public int rightbinary(int low,int high,int[] nums,int target){
+        
+        
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            
+    if ((nums[mid] == target) && ( (mid == (nums.length -1)) || (nums[mid] < nums[mid+1]) )){
+                return mid;    
+            }
+            
+            else if(nums[mid] <= target){
+                low = mid   + 1;        
+            }
+            
+            else{
+                high = mid - 1;
+            }
+            
+        }
+
+        return -1;
+    }
+    
+  
+}
