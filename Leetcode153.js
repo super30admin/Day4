@@ -6,16 +6,10 @@ Space Complexity - logn
  * @return {number}
  */
 var findMin = function(nums) {
-    var left = 0,right=nums.length-1;
-    while(left<=right)
-    {
-        var mid = Math.floor((left+right)/2);
-        if(nums[mid]<nums[right])
-        {
-            right = mid;
-        }
-        else
-        left = mid+1;
+   var left=0,right=nums.length-1,mid=0;
+    while(left<=right){
+        mid = Math.floor((left+right)/2);
+        nums[mid]<nums[right] ? right = mid : left=mid+1;
     }
-    return nums[right];
+    return nums[mid];
 };
