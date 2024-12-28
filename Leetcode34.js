@@ -7,53 +7,35 @@ Space complexity - logn.
  * @return {number[]}
  */
 var searchRange = function(nums, target) {
-    if(nums.length=== 0 || nums.length < 2)
-       return [nums.indexOf(target)!==-1 ? nums.indexOf(target) : -1,nums.indexOf(target)!==-1 ? nums.indexOf(target) : -1];
-    var firstindex = first(nums,target);
-    var lastindex  = last(nums,target);
-    while (nums[firstindex - 1] === target) firstindex--;
-    while (nums[lastindex + 1] === target) lastindex++;
-    return [firstindex, lastindex];
+    if(!nums.includes(target)){
+        return [-1,-1];
+    }
+    var left = leftside(nums,target);
+    var rgt  = rightside(nums,target);
+    return [rgt,left];
  }
-var first = function(nums,target) {
-    var left = 0, right = nums.length;
-    var idx=-1;
-    while(left<=right)
-    {
-      var mid = Math.floor((right+left)/2);
-      
-      if(nums[mid]>=target)
-      {
-          right = mid-1;
-      }
-      else 
-      {
-          left = mid+1;
-      }
-      if(nums[mid]===target)
-      { return idx=mid;}
+var leftside = function(nums,target){
+    var left = -1,right=nums.length;
+    while(right-left>1){
+        var mid = Math.floor((right+left)/2);
+        if(nums[mid]<=target){
+            left = mid;
+        }else{
+            right = mid;
+        }
     }
-    return idx;
-    
-};
-var last = function(nums,target) {
-    var left = 0, right = nums.length-1;
-    var idx=-1;
-    while(left<=right)
-    {
-      var mid = Math.floor((right+left)/2);
-     
-      if(nums[mid]<=target)
-      {
-          left = mid+1;
-      }
-      else 
-      {
-          right = mid-1;
-      }
-      if(nums[mid]===target)
-      { return idx=mid;}
+    return right-1;
+}
+var rightside = function(nums,target){
+    var left=-1,right=nums.length;
+    while(right-left>1){
+        var mid = Math.floor((left+right)/2);
+        if(nums[mid]<target){
+         left = mid;
+        }
+        else{
+         right = mid;
+        }
     }
-    return idx;
-    
-};
+    return left+1;
+}
