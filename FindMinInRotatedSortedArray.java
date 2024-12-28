@@ -6,28 +6,28 @@
  */
 public class FindMinInRotatedSortedArray {
     public int findMin(int[] nums) {
+        if (nums.length == 1)
+            return nums[0];
+
         int low = 0;
         int high = nums.length - 1;
 
-        // If the array is already sorted, the first element is the minimum
-        if (nums[low] <= nums[high]) {
-            return nums[low];
-        }
+        while (low <= high) {
+            // In a sorted array minimum is at lowest index
+            if (nums[low] <= nums[high])
+                return nums[low];
+            int mid = low + (high - low)/2;
+            // check if mid is smaller than its neighbors
+            if ((mid == low || nums[mid] <= nums[mid - 1]) && (mid == high || nums[mid] <= nums[mid + 1]))
+                return nums[mid];
 
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-
-            if (nums[mid] > nums[high]) {
-                // Minimum must be in the right part
-                low = mid + 1;
+            if (nums[mid] < nums[high]) {
+                high = mid - 1;
             } else {
-                // Minimum is in the left part
-                high = mid;
+                low = mid + 1;
             }
         }
-
-        // At the end low will point to the minimum element
-        return nums[low];
+        return -1;
     }
 
     public static void main(String[] args) {
