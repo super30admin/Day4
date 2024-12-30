@@ -1,3 +1,6 @@
+//Time complexity O(log(n))
+// Space complexity constant time
+
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         int low=0, high=nums.length-1, mid=0, firstPosition=0, lastPosition=0;
@@ -64,7 +67,8 @@ class Solution {
     }
 }
 
-
+//Time complexity O(log(n))
+// Space complexity constant time
 
 class Solution {
     public int findMin(int[] nums) {
