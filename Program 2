@@ -1,0 +1,27 @@
+// if first element is less than mid element(meaning left side is sorted), mark the first elament as minimum and look in the right side of the array
+//if mid element is less than last element(meaning right side is sorted), mark the mid element as minimum and look in the left side of the array.
+//time complexity: O(log n)
+// space complexity: O(1)
+
+class Solution {
+    public int findMin(int[] nums) {
+       int low = 0;
+       int high = nums.length - 1;
+       int mid = 0;
+       if (nums.length == 1) {
+        return nums[0];
+       }
+       int ans = Integer.MAX_VALUE;
+       while (low <= high) {
+        mid = (low + high) / 2;
+            if (nums[low] <= nums[mid]) {
+                ans = Math.min(nums[low], ans);
+                low = mid + 1;
+            } else {
+                ans = Math.min(nums[mid], ans);
+                high = mid - 1;
+            }
+       }
+       return ans;
+    }
+}
