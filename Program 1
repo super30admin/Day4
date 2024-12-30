@@ -1,0 +1,56 @@
+// two apis - one for first occurance, one for last occurance
+// first occurance - if mid is target, look for first half marking high as mid-1
+// last occurance - if mid is target, look for sec half marking low as mid+1
+
+//time complexity - O(log n)
+//Space complexity - O(1)
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+
+		int firstOcc = searchFirstOcc(nums, target);
+		int secOcc = searchLastOcc(nums, target);
+		return new int[]{firstOcc, secOcc};
+}
+
+
+public int searchFirstOcc(int[] nums, int target) {
+		int low = 0;
+		int high = nums.length -  1;
+		int mid = 0;
+		if (nums.length == 0) return -1;
+		int result = -1;
+		while (low <= high) {
+			mid = (low + high)/ 2;
+			if (nums[mid] == target) {
+				result = mid;
+				high = mid - 1;
+			} else if (nums[mid] > target) {
+				high = mid -1;
+			} else {
+				low = mid + 1;
+			}
+		}
+		return result;
+}
+
+public int searchLastOcc(int[] nums, int target) {
+		int low = 0;
+		int high = nums.length -  1;
+		int mid = 0;
+		if (nums.length == 0) return -1;
+		int result = -1;
+		while (low <= high) {
+			mid = (low + high)/ 2;
+			if (nums[mid] == target) {
+				result = mid;
+				low = mid + 1;
+			} else if (nums[mid] > target) {
+				high = mid -1;
+			} else {
+				low = mid + 1 ;
+			}
+		}
+		return result;
+}
+}
