@@ -10,7 +10,6 @@ class Solution:
         high= len(nums) - 1
         while(low <= high):
             mid = low + (high-low)//2
-            ctr = ctr +1
             if(nums[low]<= nums[high]):
                 return nums[low]
             if( (mid == low) or nums[mid]< nums[mid-1]) and ((mid == high) or nums[mid] < nums[mid+1]):
