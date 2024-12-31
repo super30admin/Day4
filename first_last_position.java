@@ -1,3 +1,23 @@
+// Question:
+
+//  Problem 1: (https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+
+// Given an array of integers nums sorted in ascending order, find the starting and ending position of a given target value.
+
+// Your algorithm's runtime complexity must be in the order of O(log n).
+
+// If the target is not found in the array, return [-1, -1].
+
+// Example 1:
+
+// Input: nums = [5,7,7,8,8,10], target = 8
+// Output: [3,4]
+// Example 2:
+
+// Input: nums = [5,7,7,8,8,10], target = 6
+// Output: [-1,-1]
+
+// Description: 
 // Time Complexity :O (log n)
 // Space Complexity :O(1)
 // Did this code successfully run on Leetcode :yes
@@ -66,42 +86,3 @@ class Solution {
         return -1;
     }
 }
-
-
-
-// Time Complexity :O (log n)
-// Space Complexity :O(1)
-// Did this code successfully run on Leetcode :yes
-
-
-class Solution {
-    public int findMin(int[] nums) {
-        if(nums==null || nums.length==0){         //Base condition
-            return -1;
-        }
-        int low=0;
-        int high=nums.length-1;
-        while(low<=high){                      // To find mid there are 3 condition 1. if the array is sorted return the first element. 
-                                                //2. If both the adjacent elements are greater than the element return it ELSE move to unsorted side
-            int mid=low+(high-low)/2;
-            if(nums[low]<=nums[high]){
-                return nums[low];
-            }
-            if((mid>low && nums[mid] < nums[mid-1]) && (mid<high && nums[mid] < nums[mid+1])){
-                return nums[mid];
-            }
-            else{
-                if(nums[low]<=nums[mid]){
-                    low=mid+1;
-                }
-                else{
-                    high=mid-1;
-                }
-            }
-        }
-        return -1;
-    }
-}
-
-
-
