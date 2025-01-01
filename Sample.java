@@ -106,3 +106,35 @@ class Solution {
         return -1;
     }
 }
+
+// Time Complexity : 0(logn)
+// Space Complexity : 0(1)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+/*
+Intuition is to do a binary search and check if the mid element is peak
+If it is , then return it. Else go in the direction of middle element
+to find the peak
+*/
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        if(nums.length==1){
+            return 0;
+        }
+        int low=0,high=nums.length-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(((mid==low)||(nums[mid-1]<nums[mid])) &&
+                    ((mid==high)||(nums[mid+1]<nums[mid]))){
+                return mid;
+            }else if(nums[mid+1]>nums[mid]){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return Integer.MAX_VALUE;
+    }
+}
