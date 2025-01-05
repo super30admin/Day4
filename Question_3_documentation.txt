@@ -1,0 +1,10 @@
+Time Complexity : O(log(n))
+Space Complexity : O(1)
+Did this code successfully run on Leetcode : Yes
+Any problem you faced while coding this : No
+
+
+Your code here along with comments explaining your approach in three sentences only
+I perform BS on the array and in every iteration, at the middle point, I am checking if the midpoint is in ascending order, descending order
+or peak or valley. If it is in ascending order, there is a guarantee that the peak will exist on the right side, if it is descending 
+then there is guarantee that the peak would exist on the left side. If it is a peak then we will return the midpoint index
