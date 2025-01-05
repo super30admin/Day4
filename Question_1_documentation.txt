@@ -1,0 +1,9 @@
+Time Complexity : O(log(n)+log(n)+log(n))
+Space Complexity : O(1)
+Did this code successfully run on Leetcode : Yes
+Any problem you faced while coding this : No
+
+
+Your code here along with comments explaining your approach in three sentences only
+I applied BS to find if the element is present in the array. If it is present, then I am finding the right boundary and left boundary
+of the elements by performing BS again.
