@@ -1,0 +1,33 @@
+// Time Complexity : O(log n) where n is the length of the array
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach in three sentences only
+//Find the sorted array.
+//Assign the first element as mininum if the first half is sorted and then perform BS on the other half to find out if there's any minimum element.
+//If the right half is sorted, then assign mid as the minimum and then perform BS on the left half to find out if there's any minimum element.
+
+
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int n = nums.size();
+        int l = 0; int h = n-1;
+        int minVal = INT_MAX;
+        while(l<=h){
+            int mid = l + (h-l)/2;
+            if(nums[l] <= nums[mid]){
+                minVal = min(minVal, nums[l]);
+                l = mid+1;
+            }
+            else{
+                minVal = min(minVal,nums[mid]);
+                h=mid-1;
+            }
+        }
+        return minVal;
+    }
+};

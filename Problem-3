@@ -1,0 +1,33 @@
+// Time Complexity : O(log n) where n is the length of the array
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach in three sentences only
+//check if the mid is a peak, if yes then return it.
+//if mid is the peak then either mid-1 or mid+1 is greater than mid.
+//In that case, the greater element has a better probability of being a peak, so perform BS in that half(which includes the greater element)
+
+
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int n = nums.size();
+        int l=0;
+        int h=n-1;
+        while(l<=h){
+            int mid = l + (h-l)/2;
+            if((mid == 0 || nums[mid] > nums[mid-1]) && (mid == n-1 || nums[mid] > nums[mid+1])){
+                return mid;
+            }
+            else if(mid < n-1 && nums[mid] < nums[mid+1]){
+                l=mid+1;
+            }
+            else{
+                h=mid-1;
+            }
+        }
+        return -1;
+    }
+};
