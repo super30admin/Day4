@@ -28,4 +28,4 @@ class Solution:
                 else:
                     high = mid - 1
 
-        return -1
+        return nums[low] # Single element case
