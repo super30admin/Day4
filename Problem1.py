@@ -1,4 +1,4 @@
-# 34. Find First and Last Position of Element in Sorted Array
+# 1. Find First and Last Position of Element in Sorted Array
 # Time Complexity: O(log n)
 # Space Complexity: O(1)
 # Did this code successfully run on Leetcode: Yes
