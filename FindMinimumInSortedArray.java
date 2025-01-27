@@ -1,4 +1,6 @@
 //The idea here is the the minimum number should be smaller that it's adjacent members. we also added few conditions if the minimum number is at the start or end of the array.
+//Time complexity: O(log n)
+//Space complexity: O(1)
 class Solution {
     public int findMin(int[] nums) {
         int low = 0;

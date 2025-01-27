@@ -1,6 +1,8 @@
 //Here the idea is that the peak element should be greater than it's adjacent members. 
 //To find that, we will travel to the side where the element is greater than the mid element. 
 //It gives us more probability to find the peak element.
+//Time complexity: O(log n)
+//Space complexity: O(1)
 class Solution {
     public int findPeakElement(int[] nums) {
         int low = 0;

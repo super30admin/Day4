@@ -1,4 +1,6 @@
 //The approach here is to find the first occurence only first using Binary Search and then use that as the starting point for the Binary Search to find the last occurence.
+//Time complexity: O(log n)
+//Space complexity: O(1)
 
 class Solution {
     private int firstOccurence(int[] nums, int low, int high, int target){
