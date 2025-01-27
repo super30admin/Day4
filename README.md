@@ -19,6 +19,56 @@ Example 2:
 Input: nums = [5,7,7,8,8,10], target = 6
 Output: [-1,-1]
 
+solution:-
+
+class Solution {
+    private int binarysearchFirst(int [] nums, int low, int high,int target){
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            if(nums[mid] == target){
+                if(mid==0|| nums[mid]!=nums[mid-1]){
+                    return mid;
+                }else{
+                    high = mid-1;
+                }
+            }else if(nums[mid]>target){
+                high = mid -1;
+            }else{
+                low = mid +1;
+
+            }
+        }
+        return -1;
+    }
+    public int[] searchRange(int[] nums, int target) {
+        int n = nums.length;
+        if(nums == null || nums.length == 0) return new int []{-1,-1};
+        if(target < nums[0] || target>nums[n-1] ) return new int []{-1,-1};
+        int first = binarysearchFirst(nums,0,n-1,target);
+        if(first == -1) return new int[]{-1,-1};
+        int last = binarysearchLast(nums, first, n-1, target);
+       return new int[] {first, last};
+    }
+     private int binarysearchLast(int [] nums, int low, int high,int target){
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            if(nums[mid] == target){
+                if(mid== nums.length-1 || nums[mid]!=nums[mid+1]){
+                    return mid;
+                }else{
+                    low = mid +1;
+                }
+            }else if(nums[mid]>target){
+                high = mid -1;
+            }else{
+                low = mid +1;
+
+            }
+        }
+        return -1;
+    }
+}
+
 ## Problem 2: (https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
 
 Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
@@ -37,6 +87,29 @@ Example 2:
 Input: [4,5,6,7,0,1,2]
 Output: 0
 
+solution:
+class Solution {
+    public int findMin(int[] nums) {
+        int n = nums.length;
+        int low = 0;
+        int high = nums.length-1;
+    
+    while(low <= high){
+        if(nums[low]<=nums[high]) return nums[low];
+        int mid = low +(high -low)/2;
+        if((mid == 0 || nums[mid]< nums[mid-1]) && (mid == n-1 || nums[mid]<nums[mid+1])){
+            return nums[mid];
+        }else if(nums[low]<=nums[mid]){
+            low = mid+1;
+        }else{
+            high = mid-1;
+        }
+
+        }
+        return 7456;
+    }
+
+}
 ## Problem 3: (https://leetcode.com/problems/find-peak-element/)
 A peak element is an element that is greater than its neighbors.
 
@@ -62,4 +135,23 @@ Note:
 
 Your solution should be in logarithmic complexity.
 
+solution:-
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int n = nums.length;
+        int low =0 ; int high = n-1;
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if((mid == 0 || nums[mid] > nums[mid-1])&& (mid == n-1 || nums[mid]>nums[mid+1])){
+                return mid;
+            }else if(mid > 0 && nums[mid-1] > nums[mid]){
+                high = mid-1;
+            }else{
+                low = mid+1;
+            }
+        }
+        return 262;
+    }
+}
 
