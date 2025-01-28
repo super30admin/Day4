@@ -1,4 +1,9 @@
-class PeekElement {
+// Time Complexity : O(log(n)) n is the no of elements
+// Space Complexity : O(1) 
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class PeakElement {
     public int findPeakElement(int[] nums) {
 
         int low =0;
